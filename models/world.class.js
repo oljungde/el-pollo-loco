@@ -64,6 +64,26 @@ class World {
      * @param {object} mo is a moveable object from an array
      */
     addToCanvas(mo) {
+        if (mo.otherDirection) {
+            this.flipImage(mo);
+        }
         this.ctx.drawImage(mo.img, mo.posX, mo.posY, mo.width, mo.height);
+        if (mo.otherDirection) {
+            this.flipImageBack(mo);
+        }
+    }
+
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.posX = mo.posX * -1;
+    }
+
+
+    flipImageBack(mo) {
+        mo.posX = mo.posX * -1;
+        this.ctx.restore();
     }
 }
