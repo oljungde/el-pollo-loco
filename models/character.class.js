@@ -9,6 +9,7 @@ class Character extends MovableObject {
     ];
     world;
     speed = 8;
+    walkingAudio = new Audio('./../audio/walking.mp3')
 
 
     constructor() {
@@ -20,13 +21,16 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
+            this.walkingAudio.pause();
             if (this.world.keyboard.RIGHT && this.posX < this.world.level.levelEndPosX) {
                 this.posX += this.speed;
                 this.otherDirection = false;
+                this.walkingAudio.play();
             }
             if (this.world.keyboard.LEFT && this.posX > 102) {
                 this.posX -= this.speed;
                 this.otherDirection = true;
+                this.walkingAudio.play();
             }
             this.world.cameraPosX = -this.posX + 100;
         }, 1000 / 60);
