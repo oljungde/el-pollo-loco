@@ -2,7 +2,7 @@ class Level {
     enemies;
     clouds;
     backgroundObjects;
-    levelEndPosX = 700;
+    levelEndPosX = 1200;
 
 
     constructor(enemies, clouds, backgroundObjects) {
