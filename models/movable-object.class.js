@@ -18,6 +18,22 @@ class MovableObject {
     }
 
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
+    }
+
+
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = '4';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.posX, this.posY, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
+
     /**
      * loads all images in the arry imageCache of one movable object
      * @param {array} imageCache is the array of all images from one movable object
@@ -67,5 +83,12 @@ class MovableObject {
 
     isAboveGround() {
         return this.posY < 150;
+    }
+
+    isColliding(mo) {
+        return this.posX + this.width > mo.posX &&
+            this.posY + this.height > mo.posY &&
+            this.posX < mo.posX &&
+            this.posY < mo.posY + mo.height;
     }
 }
