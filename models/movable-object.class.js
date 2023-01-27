@@ -92,4 +92,17 @@ class MovableObject {
             this.posX < mo.posX &&
             this.posY < mo.posY + mo.height;
     }
+
+
+    hit() {
+        this.energy -= 2;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        }
+    }
+
+
+    isDead() {
+        return this.energy == 0;
+    }
 }
