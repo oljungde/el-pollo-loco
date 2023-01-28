@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    statusbar = new Statusbar();
     level = level1;
     canvas;
     ctx;
@@ -28,6 +29,7 @@ class World {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     console.log('Collision with character, energy', this.character.energy);
+                    this.statusbar.setEnergyValue(this.character.energy);
                 };
             });
         }, 200);
@@ -42,6 +44,10 @@ class World {
         this.addObjectsToCanvas(this.level.clouds);
         this.addObjectsToCanvas(this.level.enemies);
         this.addToCanvas(this.character);
+
+        this.ctx.translate(-this.cameraPosX, 0);
+        this.addToCanvas(this.statusbar);
+        this.ctx.translate(this.cameraPosX, 0);
 
         this.ctx.translate(-this.cameraPosX, 0);
 
