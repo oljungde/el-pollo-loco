@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     statusbar = new Statusbar();
+    throwableObjects = [];
     level = level1;
     canvas;
     ctx;
@@ -14,7 +15,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
 
@@ -23,16 +24,31 @@ class World {
     }
 
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    console.log('Collision with character, energy', this.character.energy);
-                    this.statusbar.setEnergyValue(this.character.energy);
-                };
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 200);
+    }
+
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                console.log('Collision with character, energy', this.character.energy);
+                this.statusbar.setEnergyValue(this.character.energy);
+            };
+        });
+    }
+
+
+    checkThrowObjects() {
+        if (this.keyboard.THROW) {
+            let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
+            this.throwableObjects.push(bottle);
+            console.log('Flasche wurde geworfen')
+        }
     }
 
 
@@ -47,6 +63,7 @@ class World {
 
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.statusbar);
+        this.addObjectsToCanvas(this.throwableObjects);
         this.ctx.translate(this.cameraPosX, 0);
 
         this.ctx.translate(-this.cameraPosX, 0);

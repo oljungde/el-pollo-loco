@@ -24,6 +24,9 @@ window.addEventListener('keydown', (ev) => {
     if (ev.key == ' ') {
         keyboard.SPACE = true;
     }
+    if (ev.key == 'd') {
+        keyboard.THROW = true;
+    }
 });
 
 
@@ -39,5 +42,8 @@ window.addEventListener('keyup', (ev) => {
     }
     if (ev.key == ' ') {
         keyboard.SPACE = false;
+    }
+    if (ev.key == 'd') {
+        keyboard.THROW = false;
     }
 });
