@@ -41,12 +41,24 @@ class World {
                 this.statusbar.setEnergyValue(this.character.energy);
             };
         });
-        this.level.throwableObjects.forEach((throwableObject) => {
-            if (this.character.isColliding(throwableObject)) {
+        // this.level.throwableObjects.forEach((throwableObject) => {
+        //     if (this.character.isColliding(throwableObject)) {
+        //         
+        //         console.log(throwableObject.posX);
+        //         console.log(this.collectedThrowableObjects);
+        //         console.log(this.throwableObjects);
+        //     }
+        // })
+        for (let throwableObjectIndex = 0; throwableObjectIndex < this.level.throwableObjects.length; throwableObjectIndex++) {
+            if (this.character.isColliding(this.level.throwableObjects[throwableObjectIndex])) {
+                const throwableObject = this.level.throwableObjects[throwableObjectIndex];
                 this.collectedThrowableObjects.push(throwableObject);
-                console.log(this.collectedThrowableObjects);
+                this.level.throwableObjects.splice(throwableObjectIndex, 1);
+                console.log('Noch vorhandene Objekte: ', this.level.throwableObjects);
+                console.log('Gesammelte Objekte: ', this.collectedThrowableObjects);
+                this.draw();
             }
-        })
+        }
     }
 
 

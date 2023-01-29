@@ -7,7 +7,7 @@ class ThrowableObject extends MovableObject {
         this.posX = this.posX + Math.random() * 1000;
         this.width = 75;
         this.height = 75;
-        // thids.throw();
+        // this.throw();
     }
 
 
