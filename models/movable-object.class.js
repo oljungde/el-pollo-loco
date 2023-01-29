@@ -17,7 +17,6 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.posX += this.speed;
-
     }
 
 
