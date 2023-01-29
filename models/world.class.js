@@ -2,6 +2,7 @@ class World {
     character = new Character();
     statusbar = new Statusbar();
     throwableObjects = [];
+    collectedThrowableObjects = [];
     level = level1;
     canvas;
     ctx;
@@ -27,7 +28,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkThrowObjects();
+            // this.checkThrowObjects();
         }, 200);
     }
 
@@ -40,16 +41,22 @@ class World {
                 this.statusbar.setEnergyValue(this.character.energy);
             };
         });
+        this.level.throwableObjects.forEach((throwableObject) => {
+            if (this.character.isColliding(throwableObject)) {
+                this.collectedThrowableObjects.push(throwableObject);
+                console.log(this.collectedThrowableObjects);
+            }
+        })
     }
 
 
-    checkThrowObjects() {
-        if (this.keyboard.THROW) {
-            let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
-            this.throwableObjects.push(bottle);
-            console.log('Flasche wurde geworfen')
-        }
-    }
+    // checkThrowObjects() {
+    //     if (this.keyboard.THROW) {
+    //         let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
+    //         this.throwableObjects.push(bottle);
+    //         console.log('Flasche wurde geworfen')
+    //     }
+    // }
 
 
     draw() {
@@ -59,6 +66,7 @@ class World {
         this.addObjectsToCanvas(this.level.backgroundObjects);
         this.addObjectsToCanvas(this.level.clouds);
         this.addObjectsToCanvas(this.level.enemies);
+        this.addObjectsToCanvas(this.level.throwableObjects);
         this.addToCanvas(this.character);
 
         this.ctx.translate(-this.cameraPosX, 0);
