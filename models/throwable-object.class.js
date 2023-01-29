@@ -3,7 +3,7 @@ class ThrowableObject extends MovableObject {
     posX = 200;
 
     constructor() {
-        super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
+        super().loadImage('./img/6_salsa_bottle/salsa_bottle.png');
         this.posX = this.posX + Math.random() * 1000;
         this.width = 75;
         this.height = 75;
