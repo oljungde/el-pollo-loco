@@ -3,8 +3,9 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1.5;
-    energy = 100;
+    characterEnergy = 100;
     lastHit = 0;
+    bottleCount = 0;
 
 
     playAnimation(images) {
@@ -57,9 +58,9 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.energy -= 2;
-        if (this.energy <= 0) {
-            this.energy = 0;
+        this.characterEnergy -= 2;
+        if (this.characterEnergy <= 0) {
+            this.characterEnergy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -74,6 +75,11 @@ class MovableObject extends DrawableObject {
 
 
     isDead() {
-        return this.energy == 0;
+        return this.characterEnergy == 0;
+    }
+
+
+    collectBottle() {
+        this.bottleCount += 1;
     }
 }

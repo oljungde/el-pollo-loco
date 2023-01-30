@@ -1,6 +1,7 @@
 class World {
     character = new Character();
-    statusbar = new Statusbar();
+    characterEnergyStatusbar = new CharacterStatusbar();
+    bottleStatusbar = new BottleStatusbar();
     throwableObjects = [];
     collectedThrowableObjects = [];
     level = level1;
@@ -38,27 +39,20 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 console.log('Collision with character, energy', this.character.energy);
-                this.statusbar.setEnergyValue(this.character.energy);
+                this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
         });
-        // this.level.throwableObjects.forEach((throwableObject) => {
-        //     if (this.character.isColliding(throwableObject)) {
-        //         
-        //         console.log(throwableObject.posX);
-        //         console.log(this.collectedThrowableObjects);
-        //         console.log(this.throwableObjects);
-        //     }
-        // })
-        for (let throwableObjectIndex = 0; throwableObjectIndex < this.level.throwableObjects.length; throwableObjectIndex++) {
-            if (this.character.isColliding(this.level.throwableObjects[throwableObjectIndex])) {
+        this.level.throwableObjects.forEach((throwableObject, throwableObjectIndex) => {
+            if (this.character.isColliding(throwableObject)) {
                 const throwableObject = this.level.throwableObjects[throwableObjectIndex];
                 this.collectedThrowableObjects.push(throwableObject);
                 this.level.throwableObjects.splice(throwableObjectIndex, 1);
-                console.log('Noch vorhandene Objekte: ', this.level.throwableObjects);
-                console.log('Gesammelte Objekte: ', this.collectedThrowableObjects);
+                this.character.collectBottle();
+                console.log('gesammelte Flaschen: ', this.character.bottleCount);
+                this.bottleStatusbar.setBottleValue(this.character.bottleCount);
                 this.draw();
             }
-        }
+        });
     }
 
 
@@ -82,7 +76,8 @@ class World {
         this.addToCanvas(this.character);
 
         this.ctx.translate(-this.cameraPosX, 0);
-        this.addToCanvas(this.statusbar);
+        this.addToCanvas(this.characterEnergyStatusbar);
+        this.addToCanvas(this.bottleStatusbar);
         this.addObjectsToCanvas(this.throwableObjects);
         this.ctx.translate(this.cameraPosX, 0);
 

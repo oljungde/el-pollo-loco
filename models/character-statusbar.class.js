@@ -1,4 +1,4 @@
-class Statusbar extends DrawableObject {
+class CharacterStatusbar extends DrawableObject {
     IMAGES_ENERGY_STATUSBAR = [
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
         './img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
@@ -15,7 +15,7 @@ class Statusbar extends DrawableObject {
         this.loadImages(this.IMAGES_ENERGY_STATUSBAR);
         this.width = 198;
         this.height = 53;
-        this.posX = 32;
+        this.posX = 8;
         this.posY = 0;
         this.setEnergyValue(100);
     }
