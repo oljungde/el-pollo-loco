@@ -3,6 +3,7 @@ class World {
     characterEnergyStatusbar = new CharacterStatusbar();
     bottleStatusbar = new BottleStatusbar();
     throwableObjects = [];
+    bottlesToThrow = [];
     collectedBottles = [];
     level = level1;
     canvas;
@@ -58,14 +59,11 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.THROW) {
-            // let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
-            // this.throwableObjects.push(bottle);
-            let bottle = this.collectedThrowableObjects[0];
-            console.log(bottle.posX);
-            bottle.posX = this.character.posX + 80;
-            console.log(bottle.posX);
-            bottle.posY = this.character.posY + 100;
-            bottle.throw();
+            let bottleToThrow = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
+            console.log('Position character: ', this.character.posX);
+            this.bottlesToThrow.push(bottleToThrow);
+            console.log('Position bootle: ', bottleToThrow.posX);
+            bottleToThrow.throw();
             console.log('Flasche wurde geworfen')
         }
     }
@@ -84,7 +82,7 @@ class World {
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
-        this.addObjectsToCanvas(this.throwableObjects);
+        this.addObjectsToCanvas(this.bottlesToThrow);
         this.ctx.translate(this.cameraPosX, 0);
 
         this.ctx.translate(-this.cameraPosX, 0);
