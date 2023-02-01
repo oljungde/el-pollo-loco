@@ -49,7 +49,6 @@ class World {
                 this.collectedBottles.push(bottle);
                 this.level.bottles.splice(bottleIndex, 1);
                 this.character.collectBottle();
-                console.log('gesammelte Flaschen: ', this.character.bottleCount);
                 this.bottleStatusbar.setBottleValue(this.character.bottleCount);
                 this.draw();
             }
@@ -58,13 +57,13 @@ class World {
 
 
     checkThrowObjects() {
-        if (this.keyboard.THROW) {
+        if (this.keyboard.THROW && this.collectedBottles.length > 0) {
             let bottleToThrow = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
-            console.log('Position character: ', this.character.posX);
             this.bottlesToThrow.push(bottleToThrow);
-            console.log('Position bootle: ', bottleToThrow.posX);
+            this.collectedBottles.splice(0, 1);
+            this.character.bottleCount = this.character.bottleCount - 1;
+            this.bottleStatusbar.setBottleValue(this.character.bottleCount);
             bottleToThrow.throw();
-            console.log('Flasche wurde geworfen')
         }
     }
 
@@ -82,9 +81,8 @@ class World {
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
-        this.addObjectsToCanvas(this.bottlesToThrow);
         this.ctx.translate(this.cameraPosX, 0);
-
+        this.addObjectsToCanvas(this.bottlesToThrow);
         this.ctx.translate(-this.cameraPosX, 0);
 
         let self = this;
