@@ -3,7 +3,7 @@ class World {
     characterEnergyStatusbar = new CharacterStatusbar();
     bottleStatusbar = new BottleStatusbar();
     throwableObjects = [];
-    collectedThrowableObjects = [];
+    collectedBottles = [];
     level = level1;
     canvas;
     ctx;
@@ -29,7 +29,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            // this.checkThrowObjects();
+            this.checkThrowObjects();
         }, 200);
     }
 
@@ -42,11 +42,11 @@ class World {
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
         });
-        this.level.throwableObjects.forEach((throwableObject, throwableObjectIndex) => {
-            if (this.character.isColliding(throwableObject)) {
-                const throwableObject = this.level.throwableObjects[throwableObjectIndex];
-                this.collectedThrowableObjects.push(throwableObject);
-                this.level.throwableObjects.splice(throwableObjectIndex, 1);
+        this.level.bottles.forEach((bottle, bottleIndex) => {
+            if (this.character.isColliding(bottle) && this.collectedBottles.length != 10) {
+                const bottle = this.level.bottles[bottleIndex];
+                this.collectedBottles.push(bottle);
+                this.level.bottles.splice(bottleIndex, 1);
                 this.character.collectBottle();
                 console.log('gesammelte Flaschen: ', this.character.bottleCount);
                 this.bottleStatusbar.setBottleValue(this.character.bottleCount);
@@ -56,13 +56,19 @@ class World {
     }
 
 
-    // checkThrowObjects() {
-    //     if (this.keyboard.THROW) {
-    //         let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
-    //         this.throwableObjects.push(bottle);
-    //         console.log('Flasche wurde geworfen')
-    //     }
-    // }
+    checkThrowObjects() {
+        if (this.keyboard.THROW) {
+            // let bottle = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
+            // this.throwableObjects.push(bottle);
+            let bottle = this.collectedThrowableObjects[0];
+            console.log(bottle.posX);
+            bottle.posX = this.character.posX + 80;
+            console.log(bottle.posX);
+            bottle.posY = this.character.posY + 100;
+            bottle.throw();
+            console.log('Flasche wurde geworfen')
+        }
+    }
 
 
     draw() {
@@ -72,7 +78,7 @@ class World {
         this.addObjectsToCanvas(this.level.backgroundObjects);
         this.addObjectsToCanvas(this.level.clouds);
         this.addObjectsToCanvas(this.level.enemies);
-        this.addObjectsToCanvas(this.level.throwableObjects);
+        this.addObjectsToCanvas(this.level.bottles);
         this.addToCanvas(this.character);
 
         this.ctx.translate(-this.cameraPosX, 0);
