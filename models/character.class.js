@@ -110,6 +110,9 @@ class Character extends MovableObject {
                 this.idleTimeout = 0;
                 this.jump();
             }
+            if (this.world.keyboard.THROW) {
+                this.idleTimeout = 0;
+            }
             if (this.isHurt()) {
                 this.idleTimeout = 0;
                 this.playAnimation(this.IMAGES_HURT);
