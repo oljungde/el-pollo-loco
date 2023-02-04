@@ -1,4 +1,4 @@
-class ThrowableObject extends MovableObject {
+class ThrowableObject {
     IMAGES_THROWN = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         './img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -15,34 +15,13 @@ class ThrowableObject extends MovableObject {
     ];
 
 
-    constructor(posX, posY) {
-        super().loadImage('./img/6_salsa_bottle/salsa_bottle.png');
-        this.posX = posX;
-        this.posY = posY;
-        this.width = 75;
-        this.height = 75;
-        this.loadImages(this.IMAGES_THROWN);
-        this.loadImages(this.IMAGES_SPLASH);
-        this.animate();
-    }
-
-
-    animate() {
-        setInterval(() => {
-            if (!this instanceof Bottle) {
-                this.playAnimation(this.IMAGES_THROWN);
-            }
-            if (!this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_SPLASH);
-
-
-            }
-        }, 150);
-
-
-        // this.playAnimation(this.IMAGES_SPLASH);
-
-    }
+    // constructor(posX, posY) {
+    //     super();
+    //     this.posX = posX;
+    //     this.posY = posY;
+    //     this.width = 75;
+    //     this.height = 75;
+    // }
 
 
     throw() {

@@ -2,9 +2,6 @@ class World {
     character = new Character();
     characterEnergyStatusbar = new CharacterStatusbar();
     bottleStatusbar = new BottleStatusbar();
-    throwableObjects = [];
-    bottlesToThrow = [];
-    collectedBottles = [];
     level = level1;
     canvas;
     ctx;
@@ -43,28 +40,11 @@ class World {
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
         });
-        this.level.bottles.forEach((bottle, bottleIndex) => {
-            if (this.character.isColliding(bottle) && this.collectedBottles.length != 10) {
-                const bottle = this.level.bottles[bottleIndex];
-                this.collectedBottles.push(bottle);
-                this.level.bottles.splice(bottleIndex, 1);
-                this.character.collectBottle();
-                this.bottleStatusbar.setBottleValue(this.character.bottleCount);
-                this.draw();
-            }
-        });
     }
 
 
     checkThrowObjects() {
-        if (this.keyboard.THROW && this.collectedBottles.length > 0) {
-            let bottleToThrow = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
-            this.bottlesToThrow.push(bottleToThrow);
-            this.collectedBottles.splice(0, 1);
-            this.character.bottleCount = this.character.bottleCount - 1;
-            this.bottleStatusbar.setBottleValue(this.character.bottleCount);
-            bottleToThrow.throw();
-        }
+
     }
 
 
@@ -82,7 +62,7 @@ class World {
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
         this.ctx.translate(this.cameraPosX, 0);
-        this.addObjectsToCanvas(this.bottlesToThrow);
+
         this.ctx.translate(-this.cameraPosX, 0);
 
         let self = this;

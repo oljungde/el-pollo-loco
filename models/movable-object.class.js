@@ -5,7 +5,6 @@ class MovableObject extends DrawableObject {
     acceleration = 1.5;
     characterEnergy = 100;
     lastHit = 0;
-    bottleCount = 0;
 
 
     playAnimation(images) {
@@ -43,7 +42,7 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return this.posY < 371;
+            return true;
         } else {
             return this.posY < 150;
         }
@@ -76,10 +75,5 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.characterEnergy == 0;
-    }
-
-
-    collectBottle() {
-        this.bottleCount += 1;
     }
 }
