@@ -61,6 +61,7 @@ class Character extends MovableObject {
     speed = 8;
     walkingAudio = new Audio('./audio/walking.mp3');
     idleTimeout = 0;
+    collectedBottles = [];
 
 
     constructor() {

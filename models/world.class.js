@@ -7,6 +7,8 @@ class World {
     ctx;
     keyboard;
     cameraPosX = 0;
+    bottlesToThrow = [];
+    isBottleThrown = false;
 
 
     constructor(canvas, keyboard) {
@@ -40,11 +42,29 @@ class World {
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
         });
+        this.level.bottles.forEach((bottle, indexOfBottles) => {
+            if (this.character.isColliding(bottle) && this.character.collectedBottles.length < 10) {
+                this.character.collectedBottles.push(bottle);
+                this.level.bottles.splice(indexOfBottles, 1);
+                this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
+            }
+        })
     }
 
 
     checkThrowObjects() {
-
+        if (this.keyboard.THROW && this.character.collectedBottles.length > 0 && !this.isBottleThrown) {
+            if (!this.character.otherDirection) {
+                this.bottleToThrow = new ThrowableObject(this.character.posX + 80, this.character.posY + 100);
+            } else {
+                this.bottleToThrow = new ThrowableObject(this.character.posX + 20, this.character.posY + 100);
+            }
+            this.bottlesToThrow.push(this.bottleToThrow);
+            this.character.collectedBottles.splice(0, 1);
+            this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
+            this.bottleToThrow.throw();
+            this.isBottleThrown = true;
+        }
     }
 
 
@@ -63,6 +83,7 @@ class World {
         this.addToCanvas(this.bottleStatusbar);
         this.ctx.translate(this.cameraPosX, 0);
 
+        this.addObjectsToCanvas(this.bottlesToThrow);
         this.ctx.translate(-this.cameraPosX, 0);
 
         let self = this;
