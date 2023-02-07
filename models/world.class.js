@@ -27,10 +27,10 @@ class World {
 
 
     run() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 100);
     }
 
 
@@ -48,14 +48,24 @@ class World {
                 this.level.bottles.splice(indexOfBottles, 1);
                 this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
             }
-        })
+        });
         this.bottlesToThrow.forEach((bottle, bottleIndex) => {
             if (this.level.endboss.isColliding(bottle)) {
-                console.log('endboss bottle');
+                this.level.endboss.isCollided = true;
                 this.level.endboss.hit();
-                console.log(this.level.endboss.energy);
+                setTimeout(() => {
+                    this.bottlesToThrow.splice(bottleIndex);
+                    world.isBottleThrown = false;
+                    this.level.endboss.isCollided = false;
+                }, 100);
             }
-        })
+            if (!bottle.isAboveGround()) {
+                setTimeout(() => {
+                    this.bottlesToThrow.splice(bottleIndex);
+                    world.isBottleThrown = false;
+                }, 100);
+            }
+        });
     }
 
 

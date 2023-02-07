@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
     offsetY;
     offsetX;
-    speed = 0.015;
+    speed = 0.15;
     otherDirection = false;
     speedY = 0;
     acceleration = 1.5;
@@ -33,7 +33,7 @@ class MovableObject extends DrawableObject {
 
 
     applyGravity() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.posY -= this.speedY;
                 this.speedY -= this.acceleration;

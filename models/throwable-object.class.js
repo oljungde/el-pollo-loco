@@ -27,16 +27,11 @@ class ThrowableObject extends Bottle {
 
 
     animate() {
-        let test = setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
-            if (!this.isAboveGround() || world.level.endboss.isHurt()) {
+            if (world.level.endboss.isCollided || !this.isAboveGround()) {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES_SPLASH);
-                setTimeout(() => {
-                    world.bottlesToThrow.splice(0, 1);
-                    clearInterval(test);
-                    world.isBottleThrown = false;
-                }, 100);
             }
         }, 100);
     }
@@ -46,7 +41,7 @@ class ThrowableObject extends Bottle {
         if (!world.isBottleThrown) {
             this.speedY = 30;
             this.applyGravity();
-            setInterval(() => {
+            setStoppableInterval(() => {
                 if (this.speed == 0) {
                     this.posX += 0;
                 }

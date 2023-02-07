@@ -5,6 +5,7 @@ class Endboss extends MovableObject {
     energy = 20;
     offsetY = 50;
     offsetX = 8;
+    isCollided = false;
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -27,7 +28,7 @@ class Endboss extends MovableObject {
 
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 500);
     }

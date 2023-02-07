@@ -81,7 +81,7 @@ class Character extends MovableObject {
 
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.walkingAudio.pause();
             if (this.world.keyboard.RIGHT && this.posX < this.world.level.levelEndPosX) {
                 this.moveRight();
@@ -96,7 +96,8 @@ class Character extends MovableObject {
             this.world.cameraPosX = -this.posX + 100;
         }, 1000 / 60);
 
-        setInterval(() => {
+
+        setStoppableInterval(() => {
             this.characterIdle();
             if (this.isDead()) {
                 this.idleTimeout = 0;
@@ -121,7 +122,7 @@ class Character extends MovableObject {
                 this.idleTimeout = 0;
                 this.playAnimation(this.IMAGES_HURT);
             }
-        }, 150);
+        }, 150)
     }
 
     characterIdle() {
