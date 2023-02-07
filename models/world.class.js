@@ -49,6 +49,13 @@ class World {
                 this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
             }
         })
+        this.bottlesToThrow.forEach((bottle, bottleIndex) => {
+            if (this.level.endboss.isColliding(bottle)) {
+                console.log('endboss bottle');
+                this.level.endboss.hit();
+                console.log(this.level.endboss.energy);
+            }
+        })
     }
 
 
@@ -74,6 +81,7 @@ class World {
 
         this.addObjectsToCanvas(this.level.backgroundObjects);
         this.addObjectsToCanvas(this.level.clouds);
+        this.addToCanvas(this.level.endboss);
         this.addObjectsToCanvas(this.level.enemies);
         this.addObjectsToCanvas(this.level.bottles);
         this.addToCanvas(this.character);

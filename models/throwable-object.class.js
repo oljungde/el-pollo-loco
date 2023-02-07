@@ -29,14 +29,14 @@ class ThrowableObject extends Bottle {
     animate() {
         let test = setInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
-            if (!this.isAboveGround()) {
+            if (!this.isAboveGround() || world.level.endboss.isHurt()) {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES_SPLASH);
                 setTimeout(() => {
                     world.bottlesToThrow.splice(0, 1);
                     clearInterval(test);
                     world.isBottleThrown = false;
-                }, 150);
+                }, 100);
             }
         }, 100);
     }
