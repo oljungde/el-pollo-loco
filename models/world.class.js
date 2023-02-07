@@ -36,7 +36,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) || this.character.isColliding(this.level.endboss)) {
                 this.character.hit();
                 console.log('Collision with character, energy', this.character.energy);
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
@@ -123,6 +123,7 @@ class World {
 
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
+        mo.drawFrameOffset(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

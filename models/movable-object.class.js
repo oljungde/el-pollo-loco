@@ -1,5 +1,7 @@
 class MovableObject extends DrawableObject {
-    speed = 0.15;
+    offsetY;
+    offsetX;
+    speed = 0.015;
     otherDirection = false;
     speedY = 0;
     acceleration = 1.5;
@@ -49,10 +51,10 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
-        return this.posX + this.width > mo.posX &&
-            this.posY + this.height > mo.posY &&
-            this.posX < mo.posX &&
-            this.posY < mo.posY + mo.height;
+        return (this.posX - this.offsetX / 2 + this.width) >= mo.posX &&
+            (this.posY + this.offsetY + this.height) >= mo.posY &&
+            (this.posX - this.offsetX / 2) <= (mo.posX + mo.width) &&
+            (this.posY + this.offsetY) <= (mo.posY + mo.height)
     }
 
 
