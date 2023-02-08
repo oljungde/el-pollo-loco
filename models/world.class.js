@@ -55,14 +55,14 @@ class World {
                 this.level.endboss.hit();
                 setTimeout(() => {
                     this.bottlesToThrow.splice(bottleIndex);
-                    world.isBottleThrown = false;
+                    this.isBottleThrown = false;
                     this.level.endboss.isCollided = false;
                 }, 100);
             }
             if (!bottle.isAboveGround()) {
                 setTimeout(() => {
                     this.bottlesToThrow.splice(bottleIndex);
-                    world.isBottleThrown = false;
+                    this.isBottleThrown = false;
                 }, 100);
             }
         });
@@ -91,10 +91,10 @@ class World {
 
         this.addObjectsToCanvas(this.level.backgroundObjects);
         this.addObjectsToCanvas(this.level.clouds);
+        this.addToCanvas(this.character);
         this.addToCanvas(this.level.endboss);
         this.addObjectsToCanvas(this.level.enemies);
         this.addObjectsToCanvas(this.level.bottles);
-        this.addToCanvas(this.character);
 
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.characterEnergyStatusbar);
