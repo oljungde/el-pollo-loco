@@ -2,8 +2,7 @@ class Endboss extends MovableObject {
     width = 400;
     height = 343;
     posY = 130;
-
-    energy = 20;
+    energy = 18;
     offsetY = 50;
     offsetX = 8;
     isCollided = false;
@@ -52,13 +51,16 @@ class Endboss extends MovableObject {
      */
     animate() {
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() >= 450) {
+            if (this.distanceCharacterEndboss() >= 400) {
                 this.playAnimation(this.IMAGES_ALERT);
             }
-        }, 350);
+            if (this.distanceCharacterEndboss() < 120) {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
+        }, 150);
 
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() < 450) {
+            if (this.distanceCharacterEndboss() < 400) {
                 this.playAnimation(this.IMAGES_WALK);
                 this.endbossMove();
             }
@@ -79,9 +81,9 @@ class Endboss extends MovableObject {
      */
     endbossMove() {
         let movingEndboss = setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() < 450)
+            if (this.distanceCharacterEndboss() < 400)
                 this.moveLeft()
-            if (this.distanceCharacterEndboss() > 450) {
+            if (this.distanceCharacterEndboss() > 400) {
                 clearInterval(movingEndboss);
             }
         }, 1000 / 60);
