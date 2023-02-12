@@ -3,6 +3,7 @@ class World {
     characterEnergyStatusbar = new CharacterStatusbar();
     bottleStatusbar = new BottleStatusbar();
     endbossStatusbar = new EndbossStatusbar();
+    coinStatusbar = new CoinStatusbar();
     level = level1;
     canvas;
     ctx;
@@ -48,6 +49,7 @@ class World {
         this.checkCollisionEnemiesCharacter();
         this.checkCollisionBottlesToCollect();
         this.checkCollisionTrownBottles();
+        this.checkCollisionCoinsCharacter();
     }
 
 
@@ -124,6 +126,18 @@ class World {
     }
 
 
+    checkCollisionCoinsCharacter() {
+        this.level.coins.forEach((coin, indexOfCoins) => {
+            if (this.character.isColliding(coin)) {
+                this.level.coins.splice(coin, 1);
+                this.character.collectedCoins++;
+                console.log(this.character.collectedCoins);
+                this.coinStatusbar.setCoinValue(this.character.collectedCoins);
+            }
+        });
+    }
+
+
     /**
      * checks if a collected bottle is thrown, if a bottle is thrown a new instance of the class throwableObject is created and a bottle is removed from the collected bottles 
      */
@@ -182,6 +196,7 @@ class World {
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
         this.addToCanvas(this.endbossStatusbar);
+        this.addToCanvas(this.coinStatusbar);
         this.ctx.translate(this.cameraPosX, 0);
     }
 
