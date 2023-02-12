@@ -167,6 +167,7 @@ class World {
         this.addToCanvas(this.level.endboss);
         this.addObjectsToCanvas(this.level.enemies);
         this.addObjectsToCanvas(this.level.bottles);
+        this.addObjectsToCanvas(this.level.coins);
         this.drawStatusBars();
         this.addObjectsToCanvas(this.bottlesToThrow);
         this.ctx.translate(-this.cameraPosX, 0);
