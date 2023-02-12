@@ -13,6 +13,9 @@ class Cloud extends MovableObject {
     }
 
 
+    /**
+     * play the animation to move the clounds from right to left
+     */
     animate() {
         setStoppableInterval(() => {
             this.moveLeft();

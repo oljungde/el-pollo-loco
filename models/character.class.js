@@ -80,56 +80,133 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * function to animate the character
+     */
     animate() {
+        this.characterMove();
+        this.characterAnimation();
+    }
+
+
+    /**
+     * moves the character on the x axis to the right or left
+     */
+    characterMove() {
         setStoppableInterval(() => {
             this.walkingAudio.pause();
-            if (this.world.keyboard.RIGHT && this.posX < this.world.level.levelEndPosX) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walkingAudio.play();
-            }
-            if (this.world.keyboard.LEFT && this.posX > 102) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walkingAudio.play();
-            }
+            this.characterMoveRight();
+            this.characterMoveLeft();
             this.world.cameraPosX = -this.posX + 100;
         }, 1000 / 60);
+    }
 
 
+    /**
+     * moves the character to right
+     */
+    characterMoveRight() {
+        if (this.world.keyboard.RIGHT && this.posX < this.world.level.levelEndPosX) {
+            this.moveRight();
+            this.otherDirection = false;
+            this.walkingAudio.play();
+        }
+    }
+
+
+    /**
+     * moves the character to left
+     */
+    characterMoveLeft() {
+        if (this.world.keyboard.LEFT && this.posX > 102) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.walkingAudio.play();
+        }
+    }
+
+
+    /**
+     * play all needed anitmations of the chracter
+     */
+    characterAnimation() {
         setStoppableInterval(() => {
             this.characterIdle();
-            if (this.isDead()) {
-                this.idleTimeout = 0;
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.idleTimeout = 0;
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-            if (this.isAboveGround()) {
-                this.idleTimeout = 0;
-                this.playAnimation(this.IMAGES_JUMPING);
-            }
-            if (this.world.keyboard.UP && !this.isAboveGround()) {
-                this.idleTimeout = 0;
-                this.jump();
-            }
-            if (this.world.keyboard.THROW) {
-                this.idleTimeout = 0;
-            }
-            if (this.isHurt()) {
-                this.idleTimeout = 0;
-                this.playAnimation(this.IMAGES_HURT);
-            }
+            this.animationCharacterDead();
+            this.animationCharacterWalking();
+            this.animationCharacterJump();
+            this.animationCharacterThrowBottle();
+            this.animationCharacterIsHurt();
         }, 150)
     }
 
+
+    /**
+     * play animation when character fall to sleep, when he is do nothing for 5 seconds
+     */
     characterIdle() {
         this.playAnimation(this.IMAGES_IDLE);
         this.idleTimeout += 150;
         if (this.idleTimeout >= 5000) {
             this.playAnimation(this.IMAGES_SLEEPING);
+        }
+    }
+
+
+    /**
+     * play dieing animation when the character lost all his energy
+     */
+    animationCharacterDead() {
+        if (this.isDead()) {
+            this.idleTimeout = 0;
+            this.playAnimation(this.IMAGES_DEAD);
+        }
+    }
+
+
+    /**
+     * play walking animation if character moves left or right
+     */
+    animationCharacterWalking() {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.idleTimeout = 0;
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+
+    /**
+     * play jumping animation
+     */
+    animationCharacterJump() {
+        if (this.isAboveGround()) {
+            this.idleTimeout = 0;
+            this.playAnimation(this.IMAGES_JUMPING);
+        }
+        if (this.world.keyboard.UP && !this.isAboveGround()) {
+            this.idleTimeout = 0;
+            this.jump();
+        }
+    }
+
+
+    /**
+     * play the trowing animation if chracter throws a salsa bottle
+     */
+    animationCharacterThrowBottle() {
+        if (this.world.keyboard.THROW) {
+            this.idleTimeout = 0;
+        }
+    }
+
+
+    /**
+     * play hurt animation if chracter is collided with an enemy
+     */
+    animationCharacterIsHurt() {
+        if (this.isHurt()) {
+            this.idleTimeout = 0;
+            this.playAnimation(this.IMAGES_HURT);
         }
     }
 }

@@ -9,6 +9,10 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
 
 
+    /**
+     * plays an animation
+     * @param {array} images is the array with all single images to play a animation
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -17,21 +21,33 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * moves the object to right
+     */
     moveRight() {
         this.posX += this.speed;
     }
 
 
+    /**
+     * moves the object to left
+     */
     moveLeft() {
         this.posX -= this.speed;
     }
 
 
+    /**
+     * moves object in the air for jumping
+     */
     jump() {
         this.speedY = 25;
     }
 
 
+    /**
+     * Add gravity to move the object towards the ground, as the speed of the jump is reduced with each interval call
+     */
     applyGravity() {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -42,6 +58,7 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /** checks if the object is above groundlevel on the y axis */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return this.posY < 365;
@@ -50,6 +67,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * checks colliding with other objects
+     * @param {object} mo ist another instance of the this class and the extendet
+     * @returns a boolean 
+     */
     isColliding(mo) {
         return (this.posX - this.offsetX / 2 + this.width) >= mo.posX &&
             (this.posY + this.offsetY + this.height) >= mo.posY &&
@@ -58,6 +80,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * checks for hitting and reduces the energy 
+     */
     hit() {
         this.energy -= 2;
         if (this.energy <= 0) {
@@ -68,6 +93,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * @returns true if the time between a hit ist less than a second, for play the hurt animation
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
@@ -75,6 +103,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * @returns true if the energy og the object is zero
+     */
     isDead() {
         return this.energy == 0;
     }

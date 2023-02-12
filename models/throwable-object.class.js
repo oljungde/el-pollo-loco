@@ -26,6 +26,9 @@ class ThrowableObject extends Bottle {
     }
 
 
+    /**
+     * play animations of a thrown salsa bottle
+     */
     animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_THROWN);
@@ -37,6 +40,9 @@ class ThrowableObject extends Bottle {
     }
 
 
+    /**
+     * function for throwing a salsa bottle in right or left deriction
+     */
     throw() {
         if (!world.isBottleThrown) {
             this.speedY = 30;

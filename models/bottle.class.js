@@ -12,6 +12,9 @@ class Bottle extends MovableObject {
     }
 
 
+    /**
+     * randomly loads a picture of a collection bottle tilted to the left or right on the floor
+     */
     randomImageLoad() {
         if (this.imageToLoad == 0) {
             this.loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');

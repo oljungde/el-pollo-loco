@@ -18,6 +18,9 @@ class Chicken extends MovableObject {
     }
 
 
+    /**
+     * animation of the chicken when it is walking
+     */
     animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_WALKING)

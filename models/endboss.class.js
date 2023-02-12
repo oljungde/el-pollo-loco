@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
     width = 400;
     height = 343;
     posY = 130;
-    // speed = 15;
+
     energy = 20;
     offsetY = 50;
     offsetX = 8;
@@ -47,6 +47,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * move the endboss and play the walking animation
+     */
     animate() {
         setStoppableInterval(() => {
             if (this.distanceCharacterEndboss() >= 450) {
@@ -63,11 +66,17 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * @returns the distance between the endboss an the character
+     */
     distanceCharacterEndboss() {
         return this.posX - world.character.posX;
     }
 
 
+    /**
+     * the endboss is moving if the distance to the character is less then 450px
+     */
     endbossMove() {
         let movingEndboss = setStoppableInterval(() => {
             if (this.distanceCharacterEndboss() < 450)

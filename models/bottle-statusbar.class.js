@@ -21,12 +21,20 @@ class BottleStatusbar extends DrawableObject {
     }
 
 
+    /**
+     * show the right images of the statusbar according to fill status
+     * @param {number} bottleValue is the value to show on the statusbar of collected bottles
+     */
     setBottleValue(bottleValue) {
         this.bottleValue = bottleValue;
         let imagePath = this.IMAGES_BOTTLE_STATUSBAR[this.resolveImageIndex()]
         this.img = this.imageCache[imagePath]
     }
 
+
+    /**
+     * @returns fill value of statusbar 
+     */
     resolveImageIndex() {
         if (this.bottleValue == 10) {
             return 5;

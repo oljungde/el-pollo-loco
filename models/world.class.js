@@ -21,11 +21,17 @@ class World {
     }
 
 
+    /**
+     * makes it possible to access the world from other objects (classes)
+     */
     setWorld() {
         this.character.world = this;
     }
 
 
+    /**
+     * starts the interval for start the game
+     */
     run() {
         setStoppableInterval(() => {
             this.checkCollisions();
@@ -34,7 +40,20 @@ class World {
     }
 
 
+    /**
+     * checks collisions between items in the world
+     */
     checkCollisions() {
+        this.checkCollisionEnemiesCharacter();
+        this.checkCollisionBottlesToCollect();
+        this.checkCollisionTrownBottles();
+    }
+
+
+    /**
+     * checks collisons from chickens with the character
+     */
+    checkCollisionEnemiesCharacter() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) || this.character.isColliding(this.level.endboss)) {
                 this.character.hit();
@@ -42,6 +61,13 @@ class World {
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
         });
+    }
+
+
+    /**
+     * checks collisions of collectable salsa bottle with the character
+     */
+    checkCollisionBottlesToCollect() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if (this.character.isColliding(bottle) && this.character.collectedBottles.length < 10) {
                 this.character.collectedBottles.push(bottle);
@@ -49,26 +75,56 @@ class World {
                 this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
             }
         });
+    }
+
+
+    /**
+     * checks collisions of a thrown salsa bottle with the ground and the endboss 
+     */
+    checkCollisionTrownBottles() {
         this.bottlesToThrow.forEach((bottle, bottleIndex) => {
-            if (this.level.endboss.isColliding(bottle)) {
-                this.level.endboss.isCollided = true;
-                this.level.endboss.hit();
-                setTimeout(() => {
-                    this.bottlesToThrow.splice(bottleIndex);
-                    this.isBottleThrown = false;
-                    this.level.endboss.isCollided = false;
-                }, 100);
-            }
-            if (!bottle.isAboveGround()) {
-                setTimeout(() => {
-                    this.bottlesToThrow.splice(bottleIndex);
-                    this.isBottleThrown = false;
-                }, 100);
-            }
+            this.checkCollisionTrownBottleEndboss(bottle, bottleIndex);
+            this.checkCollisionThrownBottleGround(bottle, bottleIndex);
         });
     }
 
 
+    /**
+     * checks the collision of a thrown bottle with the endboss and removes the collided bottle from the array of all throwable bottles
+     * @param {object} bottle is the entry of thrown bottle of all collected bottles
+     * @param {number} bottleIndex is the index of the array of collected bottles
+     */
+    checkCollisionTrownBottleEndboss(bottle, bottleIndex) {
+        if (this.level.endboss.isColliding(bottle)) {
+            this.level.endboss.isCollided = true;
+            this.level.endboss.hit();
+            setTimeout(() => {
+                this.bottlesToThrow.splice(bottleIndex);
+                this.isBottleThrown = false;
+                this.level.endboss.isCollided = false;
+            }, 100);
+        }
+    }
+
+
+    /**
+     * checks the collision of a thrown bottle with the ground and removes the collided bottle from the array of all throwable bottles
+     * @param {object} bottle is the entry of thrown bottle of all collected bottles
+     * @param {number} bottleIndex is the index of the array of collected bottles
+     */
+    checkCollisionThrownBottleGround(bottle, bottleIndex) {
+        if (!bottle.isAboveGround()) {
+            setTimeout(() => {
+                this.bottlesToThrow.splice(bottleIndex);
+                this.isBottleThrown = false;
+            }, 100);
+        }
+    }
+
+
+    /**
+     * checks if a collected bottle is thrown, if a bottle is thrown a new instance of the class throwableObject is created and a bottle is removed from the collected bottles 
+     */
     checkThrowObjects() {
         if (this.keyboard.THROW && this.character.collectedBottles.length > 0 && !this.isBottleThrown) {
             if (!this.character.otherDirection) {
@@ -85,25 +141,12 @@ class World {
     }
 
 
+    /**
+     * draws all objects of the world to canvas
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.cameraPosX, 0);
-
-        this.addObjectsToCanvas(this.level.backgroundObjects);
-        this.addObjectsToCanvas(this.level.clouds);
-        this.addToCanvas(this.character);
-        this.addToCanvas(this.level.endboss);
-        this.addObjectsToCanvas(this.level.enemies);
-        this.addObjectsToCanvas(this.level.bottles);
-
-        this.ctx.translate(-this.cameraPosX, 0);
-        this.addToCanvas(this.characterEnergyStatusbar);
-        this.addToCanvas(this.bottleStatusbar);
-        this.ctx.translate(this.cameraPosX, 0);
-
-        this.addObjectsToCanvas(this.bottlesToThrow);
-        this.ctx.translate(-this.cameraPosX, 0);
-
+        this.drawWorld();
         let self = this;
         requestAnimationFrame(() => {
             self.draw();
@@ -112,7 +155,35 @@ class World {
 
 
     /**
-     * loop through an array and call the function to dray the entry on canvas
+     * draws all movable objects of the world an the canvas
+     */
+    drawWorld() {
+        this.ctx.translate(this.cameraPosX, 0);
+        this.addObjectsToCanvas(this.level.backgroundObjects);
+        this.addObjectsToCanvas(this.level.clouds);
+        this.addToCanvas(this.character);
+        this.addToCanvas(this.level.endboss);
+        this.addObjectsToCanvas(this.level.enemies);
+        this.addObjectsToCanvas(this.level.bottles);
+        this.drawStatusBars();
+        this.addObjectsToCanvas(this.bottlesToThrow);
+        this.ctx.translate(-this.cameraPosX, 0);
+    }
+
+
+    /**
+     * draws the statusbars for character, salsa bottles, collected coins and the endbos to the canvas
+     */
+    drawStatusBars() {
+        this.ctx.translate(-this.cameraPosX, 0);
+        this.addToCanvas(this.characterEnergyStatusbar);
+        this.addToCanvas(this.bottleStatusbar);
+        this.ctx.translate(this.cameraPosX, 0);
+    }
+
+
+    /**
+     * loop through the array of several objects and call the function to dray the entry on canvas for animation
      * @param {array} objects is the array of all objects from one class e.g. enemies
      */
     addObjectsToCanvas(objects) {
@@ -123,7 +194,7 @@ class World {
 
 
     /**
-     * draw every object from an array (e.g. enemies), to the canvas
+     * draw every object from the array of single object (e.g. enemies), to the canvas
      * @param {object} mo is a moveable object from an array
      */
     addToCanvas(mo) {
@@ -141,6 +212,10 @@ class World {
     }
 
 
+    /**
+     * flips the image of the character if it changes the direction walking to left
+     * @param {object} mo is an instance of the class movableObject and their extended classes
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -149,6 +224,10 @@ class World {
     }
 
 
+    /**
+     * flips the image of the character back if it changes the direction walking to right
+     * @param {object} mo is an instance of the class movableObject and their extended classes
+     */
     flipImageBack(mo) {
         mo.posX = mo.posX * -1;
         this.ctx.restore();
