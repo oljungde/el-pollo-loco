@@ -2,6 +2,7 @@ class World {
     character = new Character();
     characterEnergyStatusbar = new CharacterStatusbar();
     bottleStatusbar = new BottleStatusbar();
+    endbossStatusbar = new EndbossStatusbar();
     level = level1;
     canvas;
     ctx;
@@ -96,8 +97,9 @@ class World {
      */
     checkCollisionTrownBottleEndboss(bottle, bottleIndex) {
         if (this.level.endboss.isColliding(bottle)) {
-            this.level.endboss.isCollided = true;
             this.level.endboss.hit();
+            this.level.endboss.isCollided = true;
+            this.endbossStatusbar.setEnergyValue(this.level.endboss.energy);
             setTimeout(() => {
                 this.bottlesToThrow.splice(bottleIndex);
                 this.isBottleThrown = false;
@@ -178,6 +180,7 @@ class World {
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
+        this.addToCanvas(this.endbossStatusbar);
         this.ctx.translate(this.cameraPosX, 0);
     }
 

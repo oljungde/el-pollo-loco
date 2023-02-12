@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
     width = 400;
     height = 343;
     posY = 130;
-    energy = 18;
+    energy = 20;
     offsetY = 50;
     offsetX = 8;
     isCollided = false;
@@ -33,14 +33,25 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/3_attack/G19.png',
         './img/4_enemie_boss_chicken/3_attack/G20.png',
     ];
-
+    IMAGES_HURT = [
+        './img/4_enemie_boss_chicken/4_hurt/G21.png',
+        './img/4_enemie_boss_chicken/4_hurt/G22.png',
+        './img/4_enemie_boss_chicken/4_hurt/G23.png',
+    ];
+    IMAGES_DEAD = [
+        './img/4_enemie_boss_chicken/5_dead/G24.png',
+        './img/4_enemie_boss_chicken/5_dead/G25.png',
+        './img/4_enemie_boss_chicken/5_dead/G26.png'
+    ];
 
 
     constructor() {
         super().loadImage('./img/4_enemie_boss_chicken/2_alert/G5.png');
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_WALK);
-        this.loadImages(this.IMAGES_ATTACK)
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.posX = 1200;
         this.animate();
     }
@@ -51,11 +62,22 @@ class Endboss extends MovableObject {
      */
     animate() {
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() >= 400) {
+
+            if (this.distanceCharacterEndboss() >= 400 && !this.isHurt()) {
+                // console.log(this.isHurt());
                 this.playAnimation(this.IMAGES_ALERT);
             }
-            if (this.distanceCharacterEndboss() < 120) {
+            if (this.distanceCharacterEndboss() < 120 && !this.isHurt()) {
+                // console.log(this.isHurt());
                 this.playAnimation(this.IMAGES_ATTACK);
+            }
+            if (this.isHurt()) {
+                console.log(this.isHurt());
+                this.playAnimation(this.IMAGES_HURT);
+                console.log(this.isHurt());
+            }
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
             }
         }, 150);
 
