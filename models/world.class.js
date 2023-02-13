@@ -46,10 +46,11 @@ class World {
      * checks collisions between items in the world
      */
     checkCollisions() {
-        this.checkCollisionEnemiesCharacter();
+        this.checkColliosionJumpOnEnemies();
         this.checkCollisionBottlesToCollect();
         this.checkCollisionTrownBottles();
         this.checkCollisionCoinsCharacter();
+        this.checkCollisionEnemiesCharacter();
     }
 
 
@@ -58,7 +59,8 @@ class World {
      */
     checkCollisionEnemiesCharacter() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) || this.character.isColliding(this.level.endboss)) {
+            if (!this.character.jumpOnEnemy && this.character.isColliding(enemy) ||
+                this.character.isColliding(this.level.endboss)) {
                 this.character.hit();
                 console.log('Collision with character, energy', this.character.energy);
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
@@ -133,6 +135,21 @@ class World {
                 this.character.collectedCoins++;
                 console.log(this.character.collectedCoins);
                 this.coinStatusbar.setCoinValue(this.character.collectedCoins);
+            }
+        });
+    }
+
+
+    checkColliosionJumpOnEnemies() {
+        this.level.enemies.forEach((enemy, indexOfEnemies) => {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
+                enemy.isKilled = true;
+                this.character.jumpOnEnemy = true;
+                enemy.killEnemy();
+                setTimeout(() => {
+                    this.level.enemies.splice(indexOfEnemies, 1);
+                    this.character.jumpOnEnemy = false;
+                }, 500);
             }
         });
     }

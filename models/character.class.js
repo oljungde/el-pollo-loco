@@ -1,6 +1,6 @@
 class Character extends MovableObject {
     posY = 160;
-    offsetY = 70;
+    offsetY = 100;
     offsetX = 35;
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
@@ -66,6 +66,7 @@ class Character extends MovableObject {
     idleTimeout = 0;
     collectedBottles = [];
     collectedCoins = 0;
+    jumpOnEnemy = false;
 
 
     constructor() {
