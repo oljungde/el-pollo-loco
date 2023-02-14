@@ -11,6 +11,7 @@ class World {
     cameraPosX = 0;
     bottlesToThrow = [];
     isBottleThrown = false;
+    deadEnemies = [];
 
 
     constructor(canvas, keyboard) {
@@ -143,16 +144,58 @@ class World {
     checkColliosionJumpOnEnemies() {
         this.level.enemies.forEach((enemy, indexOfEnemies) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
-                enemy.isKilled = true;
                 this.character.jumpOnEnemy = true;
-                enemy.killEnemy();
+                let deadEnemy;
+                if (enemy instanceof Chicken) {
+                    deadEnemy = new DeadChicken(enemy.posX, enemy.posY);
+                }
+                this.deadEnemies.push(deadEnemy);
+                this.level.enemies.splice(indexOfEnemies, 1);
                 setTimeout(() => {
-                    this.level.enemies.splice(indexOfEnemies, 1);
+                    this.deadEnemies.splice(deadEnemy);
                     this.character.jumpOnEnemy = false;
-                }, 500);
+                }, 700);
             }
         });
     }
+
+
+    // *********************************************
+
+
+    // checkJumpOnSmallEnemy() {
+    //     this.level.smallEnemies.forEach((enemy) => {
+    //         if (this.canJumpOnEnemy(enemy))
+    //             this.deadSmallEnemy(enemy);
+    //     });
+    // }
+
+    // /**
+    //  * the character can jump on enemies by colliding
+    //  * @param {object} enemy 
+    //  * @returns boolean
+    //  */
+    // canJumpOnEnemy(enemy) {
+    //     return this.character.isColliding(enemy) &&
+    //         this.character.aboveGround() &&
+    //         this.character.speedY < 0;
+    // }
+
+    // /**
+    //  * conditions of enemy if it´s dead
+    //  * @param {object} enemy 
+    //  */
+    // deadEnemy(enemy) {
+    //     let deadChicken = new DeadChicken(enemy.x, enemy.y);
+    //     this.deadEnemies.push(deadChicken);
+    //     this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
+    //     this.playSound(this.soundDeadChicken, 0.1);
+    //     setTimeout(() => this.deadEnemies.splice(deadChicken), 1000);
+    // }
+
+
+
+    //************************************************ */
 
 
     /**
@@ -201,6 +244,7 @@ class World {
         this.addObjectsToCanvas(this.level.coins);
         this.drawStatusBars();
         this.addObjectsToCanvas(this.bottlesToThrow);
+        this.addObjectsToCanvas(this.deadEnemies);
         this.ctx.translate(-this.cameraPosX, 0);
     }
 
