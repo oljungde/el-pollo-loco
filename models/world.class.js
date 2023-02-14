@@ -135,7 +135,7 @@ class World {
     checkCollisionCoinsCharacter() {
         this.level.coins.forEach((coin, indexOfCoins) => {
             if (this.character.isColliding(coin)) {
-                this.level.coins.splice(coin, 1);
+                this.level.coins.splice(indexOfCoins, 1);
                 this.character.collectedCoins++;
                 console.log(this.character.collectedCoins);
                 this.coinStatusbar.setCoinValue(this.character.collectedCoins);
