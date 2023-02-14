@@ -148,6 +148,8 @@ class World {
                 let deadEnemy;
                 if (enemy instanceof Chicken) {
                     deadEnemy = new DeadChicken(enemy.posX, enemy.posY);
+                } else {
+                    deadEnemy = new DeadSmallChicken(enemy.posX, enemy.posY);
                 }
                 this.deadEnemies.push(deadEnemy);
                 this.level.enemies.splice(indexOfEnemies, 1);
@@ -158,44 +160,6 @@ class World {
             }
         });
     }
-
-
-    // *********************************************
-
-
-    // checkJumpOnSmallEnemy() {
-    //     this.level.smallEnemies.forEach((enemy) => {
-    //         if (this.canJumpOnEnemy(enemy))
-    //             this.deadSmallEnemy(enemy);
-    //     });
-    // }
-
-    // /**
-    //  * the character can jump on enemies by colliding
-    //  * @param {object} enemy 
-    //  * @returns boolean
-    //  */
-    // canJumpOnEnemy(enemy) {
-    //     return this.character.isColliding(enemy) &&
-    //         this.character.aboveGround() &&
-    //         this.character.speedY < 0;
-    // }
-
-    // /**
-    //  * conditions of enemy if it´s dead
-    //  * @param {object} enemy 
-    //  */
-    // deadEnemy(enemy) {
-    //     let deadChicken = new DeadChicken(enemy.x, enemy.y);
-    //     this.deadEnemies.push(deadChicken);
-    //     this.level.enemies.splice(this.level.enemies.indexOf(enemy), 1);
-    //     this.playSound(this.soundDeadChicken, 0.1);
-    //     setTimeout(() => this.deadEnemies.splice(deadChicken), 1000);
-    // }
-
-
-
-    //************************************************ */
 
 
     /**
