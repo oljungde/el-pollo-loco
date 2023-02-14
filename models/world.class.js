@@ -238,7 +238,9 @@ class World {
         this.ctx.translate(-this.cameraPosX, 0);
         this.addToCanvas(this.characterEnergyStatusbar);
         this.addToCanvas(this.bottleStatusbar);
-        this.addToCanvas(this.endbossStatusbar);
+        if (this.level.endboss.posX - this.character.posX < 600) {
+            this.addToCanvas(this.endbossStatusbar);
+        }
         this.addToCanvas(this.coinStatusbar);
         this.ctx.translate(this.cameraPosX, 0);
     }
