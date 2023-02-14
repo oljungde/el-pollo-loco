@@ -47,7 +47,7 @@ class World {
      * checks collisions between items in the world
      */
     checkCollisions() {
-        this.checkColliosionJumpOnEnemies();
+        this.checkCollisionJumpOnEnemies();
         this.checkCollisionBottlesToCollect();
         this.checkCollisionTrownBottles();
         this.checkCollisionCoinsCharacter();
@@ -129,6 +129,9 @@ class World {
     }
 
 
+    /**
+     * checks collissions of collectable coins with the character
+     */
     checkCollisionCoinsCharacter() {
         this.level.coins.forEach((coin, indexOfCoins) => {
             if (this.character.isColliding(coin)) {
@@ -141,20 +144,16 @@ class World {
     }
 
 
-    checkColliosionJumpOnEnemies() {
+    /**
+     * checks if the character is jumping on an enemy
+     */
+    checkCollisionJumpOnEnemies() {
         this.level.enemies.forEach((enemy, indexOfEnemies) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
                 this.character.jumpOnEnemy = true;
-                let deadEnemy;
-                if (enemy instanceof Chicken) {
-                    deadEnemy = new DeadChicken(enemy.posX, enemy.posY);
-                } else {
-                    deadEnemy = new DeadSmallChicken(enemy.posX, enemy.posY);
-                }
-                this.deadEnemies.push(deadEnemy);
-                this.level.enemies.splice(indexOfEnemies, 1);
+                this.checkKindOfEnemy(enemy, indexOfEnemies);
                 setTimeout(() => {
-                    this.deadEnemies.splice(deadEnemy);
+                    this.deadEnemies.splice(this.deadEnemy);
                     this.character.jumpOnEnemy = false;
                 }, 700);
             }
@@ -163,7 +162,26 @@ class World {
 
 
     /**
-     * checks if a collected bottle is thrown, if a bottle is thrown a new instance of the class throwableObject is created and a bottle is removed from the collected bottles 
+     * checks if a normal chicken or a small chicken is collided with the character and pushes the right dead variant
+     * to the array deadEnemies 
+     * @param {object} enemy who is collided with the character
+     * @param {number} indexOfEnemies of the array with all enemies in the world
+     */
+    checkKindOfEnemy(enemy, indexOfEnemies) {
+        let deadEnemy;
+        if (enemy instanceof Chicken) {
+            deadEnemy = new DeadChicken(enemy.posX, enemy.posY);
+        } else {
+            deadEnemy = new DeadSmallChicken(enemy.posX, enemy.posY);
+        }
+        this.deadEnemies.push(deadEnemy);
+        this.level.enemies.splice(indexOfEnemies, 1);
+    }
+
+
+    /**
+     * checks if a collected bottle is thrown, if a bottle is thrown a new instance of the class throwableObject 
+     * is created and a bottle is removed from the collected bottles 
      */
     checkThrowObjects() {
         if (this.keyboard.THROW && this.character.collectedBottles.length > 0 && !this.isBottleThrown) {

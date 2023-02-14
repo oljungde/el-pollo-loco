@@ -18,7 +18,7 @@ class SmallChicken extends MovableObject {
 
 
     /**
-     * animation of the chicken when it is walking
+     * animation of the small chicken when it is walking
      */
     animate() {
         setStoppableInterval(() => {

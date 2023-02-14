@@ -15,6 +15,9 @@ class Coin extends MovableObject {
     }
 
 
+    /**
+     * play the animation of coins, pulsing on canvas
+     */
     animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COINS);

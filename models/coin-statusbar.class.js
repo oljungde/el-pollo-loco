@@ -20,6 +20,10 @@ class CoinStatusbar extends DrawableObject {
     }
 
 
+    /**
+     * show the right images of the statusbar according to fill status
+     * @param {number} coinValue is the value to show on the statusbar of collected coins
+     */
     setCoinValue(coinValue) {
         this.coinValue = coinValue;
         let imagePath = this.IMAGES_COIN_STATUSBAR[this.resolveImageIndex()]

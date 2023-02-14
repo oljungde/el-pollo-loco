@@ -23,7 +23,7 @@ class EndbossStatusbar extends DrawableObject {
 
     /**
      * show the right images of the statusbar according to fill status
-     * @param {number} bottleValue is the value to show on the statusbar of collected bottles
+     * @param {number} bottleValue is the value to show on the statusbar of energy from endboss
      */
     setEnergyValue(energyValue) {
         this.energyValue = energyValue;
