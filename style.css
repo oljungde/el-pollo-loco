@@ -55,6 +55,28 @@ h1 {
     padding: 8px 24px;
     border-color: #9a3a17;
     border-radius: 16px;
+    cursor: pointer;
+    animation: btn-puls 1s ease-in-out infinite;
+}
+
+.spinner {
+    height: 480px;
+    width: 720px;
+    background-color: red;
+}
+
+@keyframes btn-puls {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 canvas {

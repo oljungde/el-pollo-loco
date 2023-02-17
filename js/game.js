@@ -5,9 +5,20 @@ let keyboard = new Keyboard();
 
 
 function init() {
-    canvas = document.getElementById('canvas');
+    initLevel();
+    let startscreen = document.getElementById('startscreen');
+    let canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
+    // world.addEventListener('load', () => {
+    //     startscreen.classList.add('display-none');
+    //     canvas.classList.remove('display-none');
+    // });
+    // startscreen.classList.add('display-none');
+    // canvas.classList.remove('display-none');
+    setTimeout(() => {
+        startscreen.classList.add('display-none');
+        canvas.classList.remove('display-none');
+    }, 250);
     console.log('My character is', world.character);
 }
 
