@@ -1,4 +1,5 @@
 let canvas;
+let startscreen;
 let world;
 let allIntervals = [];
 let keyboard = new Keyboard();
@@ -6,7 +7,7 @@ let keyboard = new Keyboard();
 
 function init() {
     initLevel();
-    let canvas = document.getElementById('canvas');
+    canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     console.log('My character is', world.character);
 }
@@ -19,6 +20,7 @@ function setStoppableInterval(fn, time) {
 
 
 function startGame() {
+    startscreen = document.getElementById('startscreen');
     world.character.animate();
     world.level.endboss.animate();
     world.level.enemies.forEach(enemy => {
@@ -27,6 +29,13 @@ function startGame() {
     world.level.clouds.forEach(cloud => {
         cloud.animate();
     });
+    canvas.classList.remove('display-none');
+    startscreen.classList.add('display-none');
+}
+
+
+function restartGame() {
+    init();
 }
 
 
