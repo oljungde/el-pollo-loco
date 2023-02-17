@@ -6,19 +6,8 @@ let keyboard = new Keyboard();
 
 function init() {
     initLevel();
-    let startscreen = document.getElementById('startscreen');
     let canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    // world.addEventListener('load', () => {
-    //     startscreen.classList.add('display-none');
-    //     canvas.classList.remove('display-none');
-    // });
-    // startscreen.classList.add('display-none');
-    // canvas.classList.remove('display-none');
-    setTimeout(() => {
-        startscreen.classList.add('display-none');
-        canvas.classList.remove('display-none');
-    }, 250);
     console.log('My character is', world.character);
 }
 
@@ -26,6 +15,18 @@ function init() {
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     allIntervals.push(id);
+}
+
+
+function startGame() {
+    world.character.animate();
+    world.level.endboss.animate();
+    world.level.enemies.forEach(enemy => {
+        enemy.animate();
+    });
+    world.level.clouds.forEach(cloud => {
+        cloud.animate();
+    });
 }
 
 

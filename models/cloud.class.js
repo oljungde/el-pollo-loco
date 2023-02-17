@@ -9,7 +9,7 @@ class Cloud extends MovableObject {
         this.posX = 0 + Math.random() * 500;
         this.posY = this.posY + Math.random() * 10;
         this.speed = this.speed + Math.random() * 0.2;
-        this.animate();
+
     }
 
 

@@ -53,7 +53,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.posX = 2500;
-        this.animate();
     }
 
 
@@ -64,11 +63,9 @@ class Endboss extends MovableObject {
         setStoppableInterval(() => {
 
             if (this.distanceCharacterEndboss() >= 400 && !this.isHurt()) {
-                // console.log(this.isHurt());
                 this.playAnimation(this.IMAGES_ALERT);
             }
             if (this.distanceCharacterEndboss() < 120 && !this.isHurt()) {
-                // console.log(this.isHurt());
                 this.playAnimation(this.IMAGES_ATTACK);
             }
             if (this.isHurt()) {

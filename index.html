@@ -31,15 +31,13 @@
     <script src="./levels/level1.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <h1>El Pollo Loco</h1>
-    <div id="startscreen" class="startscreen">
+    <div id="startscreen" class="startscreen display-none">
         <button id="start-btn" onclick="init()" class="start-btn">Start</button>
     </div>
 
-    <div id="spinner" class="spinner display-none">Tolle Wurst</div>
-
-    <canvas id="canvas" width="720" height="480" class="display-none">
+    <canvas id="canvas" width="720" height="480">
 
     </canvas>
 
