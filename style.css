@@ -5,14 +5,13 @@
 
 html,
 body {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+}
+
+* {
     box-sizing: border-box;
 }
 
@@ -21,16 +20,27 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
     font: 16px 'Zabars', serif;
-    letter-spacing: 3px;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
+    margin: 0;
     font-size: 80px;
     font-weight: normal;
-    margin: 0;
     color: #381609;
+    text-align: center;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .startscreen {
@@ -43,26 +53,29 @@ h1 {
     justify-content: center;
 }
 
-.start-btn {
-    height: 56px;
-    background: linear-gradient(180deg, #ffc620, #ffc01b, #ffba15, #ffb510, #ffaf0a, #ffa906, #ffa302, #ff9d00);
-    display: flex;
-    align-items: center;
-    font: 40px 'Zabars', serif;
-    letter-spacing: 1px;
-    color: #381609;
-    margin-top: 32px;
-    padding: 8px 24px;
-    border-color: #9a3a17;
-    border-radius: 16px;
-    cursor: pointer;
-    animation: btn-puls 1s ease-in-out infinite;
+canvas {
+    background-color: black;
+    display: block;
 }
 
-.spinner {
-    height: 480px;
-    width: 720px;
-    background-color: red;
+.btn {
+    background: linear-gradient(180deg, #ffc620, #ffc01b, #ffba15, #ffb510, #ffaf0a, #ffa906, #ffa302, #ff9d00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #381609;
+    border-color: #9a3a17;
+    cursor: pointer;
+}
+
+.start-btn {
+    height: 56px;
+    font: 40px 'Zabars', serif;
+    letter-spacing: 1px;
+    margin-top: 32px;
+    border-radius: 16px;
+    padding: 8px 24px;
+    animation: btn-puls 1s ease-in-out infinite;
 }
 
 @keyframes btn-puls {
@@ -79,9 +92,30 @@ h1 {
     }
 }
 
-canvas {
-    background-color: black;
-    display: block;
+.play-btns-container {
+    width: 720px;
+    position: absolute;
+    bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 32px;
+}
+
+.play-btns {
+    display: flex;
+    column-gap: 24px;
+}
+
+.play-btn {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.play-btn .img {
+    height: 32px;
+    width: 32px;
+    /* object-fit: cover; */
 }
 
 .display-none {

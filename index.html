@@ -32,14 +32,26 @@
 </head>
 
 <body onload="init()">
-    <h1>El Pollo Loco</h1>
-    <div id="startscreen" class="startscreen">
-        <button id="start-btn" onclick="startGame()" class="start-btn">Start</button>
+    <div class="content">
+        <h1>El Pollo Loco</h1>
+        <div id="startscreen" class="startscreen">
+            <button id="start-btn" onclick="startGame()" class="btn start-btn">Start</button>
+        </div>
+
+        <canvas id="canvas" width="720" height="480" class="display-none">
+
+        </canvas>
+        <div class="play-btns-container">
+            <div class="play-btns">
+                <button id="btnLeft" class="btn play-btn"><img src="./img/arrow-left.png" alt="move left" class="img"></button>
+                <button id="btnRight" class="btn play-btn"><img src="./img/arrow-right.png" alt="move right" class="img"></button>
+            </div>
+            <div class="play-btns">
+                <button id="btnJump" class="btn play-btn"><img src="./img/arrow-up.png" alt="jump" class="img"></button>
+                <button id="btnThrow" class="btn play-btn"><img src="./img/throw.png" alt="move left" class="img"></button>
+            </div>
+        </div>
     </div>
-
-    <canvas id="canvas" width="720" height="480" class="display-none">
-
-    </canvas>
 
 </body>
 
