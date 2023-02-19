@@ -32,27 +32,56 @@
 </head>
 
 <body onload="init()">
-    <div class="content">
-        <h1>El Pollo Loco</h1>
-        <div id="startscreen" class="startscreen">
-            <button id="start-btn" onclick="startGame()" class="btn start-btn">Start</button>
-        </div>
+    <div id="content" class="content">
+        <div class="game">
+            <h1>El Pollo Loco</h1>
 
-        <canvas id="canvas" width="720" height="480" class="display-none">
-
-        </canvas>
-        <div class="play-btns-container">
-            <div class="play-btns">
-                <button id="btnLeft" class="btn play-btn"><img src="./img/arrow-left.png" alt="move left" class="img"></button>
-                <button id="btnRight" class="btn play-btn"><img src="./img/arrow-right.png" alt="move right" class="img"></button>
+            <div id="startscreen" class="startscreen">
+                <button id="start-btn" onclick="startGame()" class="btn start-btn">Start</button>
             </div>
-            <div class="play-btns">
-                <button id="btnJump" class="btn play-btn"><img src="./img/arrow-up.png" alt="jump" class="img"></button>
-                <button id="btnThrow" class="btn play-btn"><img src="./img/throw.png" alt="move left" class="img"></button>
+
+            <div id="info-btns-container" class="info-btns-container">
+                <div class="info-btns">
+                    <button id="btn-info" class="btn info-btn"><img onclick="showInfo()" src="./img/info.png" alt="info" class="img"></button>
+                    <button id="btn-fullscreen" class="btn info-btn"><img onclick="fullscreen()" src="./img/expand-screen.png" alt="fullscreen view" class="img"></button>
+                </div>
+            </div>
+
+            <canvas id="canvas" width="720" height="480" class="display-none"></canvas>
+
+            <div id="play-btns-container" class="play-btns-container">
+                <div class="play-btns">
+                    <button id="btn-left" class="btn play-btn"><img src="./img/arrow-left.png" alt="move left" class="img"></button>
+                    <button id="btn-right" class="btn play-btn"><img src="./img/arrow-right.png" alt="move right" class="img"></button>
+                </div>
+
+                <div class="play-btns">
+                    <button id="btn-jump" class="btn play-btn"><img src="./img/arrow-up.png" alt="jump" class="img"></button>
+                    <button id="btn-throw" class="btn play-btn"><img src="./img/throw.png" alt="throw bottle" class="img"></button>
+                </div>
+            </div>
+
+            <div id="info" class="info display-none">
+                <div class="info-btn-container">
+                    <button onclick="closeInfo()" class="btn info-close-btn">X</button>
+                </div>
+
+                <p>All the chickens have broken out and gone mad. If our Mexican friend Pepe doesn't do something, they will eat all the seeds and destroy the harvest. Help Pepe defeat the crazy chickens. But be careful, the chickens will fight back and in the end the big rooster is waiting and he is mighty angry.</p>
+
+                <p>To move Pepe, use the arrow keys to go left or right.</p>
+
+                <p>To defeat a chick or a chicken you have to jump on it, use the arrow up key.</p>
+
+                <p>To defeat the big rooster you have to throw the salsa bottles you can collect at him, use the "d" key, on a mobile device use theright key in the bottom.</p>
+
+                <p>Good luck, you will need it.</p>
+            </div>
+
+            <div id="game-ends" class="endscreen display-none">
+                <button id="start-btn" onclick="restartGame()" class="btn start-btn">Restart</button>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

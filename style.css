@@ -16,46 +16,37 @@ body {
 }
 
 body {
+    font: 16px 'Zabars', serif;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
     background-image: url('./img/background.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
-
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font: 16px 'Zabars', serif;
 }
 
-.content {
+.game {
+    height: 560px;
+    width: 720px;
     position: relative;
-    display: flex;
-    flex-direction: column;
 }
 
 h1 {
+    background: none;
     margin: 0;
     font-size: 80px;
     font-weight: normal;
-    color: #381609;
+    color: rgb(56, 22, 9);
     text-align: center;
     letter-spacing: 3px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.startscreen {
-    height: 480px;
-    width: 720px;
-    background-image: url('./img/9_intro_outro_screens/start/startscreen_2-1.png');
-    background-size: cover;
-    background-position: 50% 50%;
-    display: flex;
-    justify-content: center;
-}
-
-canvas {
-    background-color: black;
-    display: block;
 }
 
 .btn {
@@ -66,6 +57,61 @@ canvas {
     color: #381609;
     border-color: #9a3a17;
     cursor: pointer;
+}
+
+.startscreen,
+.endscreen {
+    height: 480px;
+    width: 720px;
+    background-size: cover;
+    background-position: 50% 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.startscreen {
+    background-image: url('./img/9_intro_outro_screens/start/startscreen_2-1.png');
+}
+
+.endscreen {
+    background-image: url('./img/9_intro_outro_screens/game_over/example.png');
+}
+
+.blur {
+    filter: blur(4px);
+}
+
+.info {
+    height: 480px;
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 0 32px;
+    font-size: 28px;
+}
+
+.info-btn-container {
+    position: relative;
+    padding: 16px;
+
+}
+
+.info-close-btn {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 16px;
+    right: 0px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+canvas {
+    background-color: black;
+    display: block;
 }
 
 .start-btn {
@@ -101,7 +147,8 @@ canvas {
     padding: 0 32px;
 }
 
-.play-btns {
+.play-btns,
+.info-btns {
     display: flex;
     column-gap: 24px;
 }
@@ -115,7 +162,28 @@ canvas {
 .play-btn .img {
     height: 32px;
     width: 32px;
-    /* object-fit: cover; */
+    object-fit: cover;
+}
+
+.info-btns-container {
+    width: 720px;
+    position: absolute;
+    top: 86px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 32px;
+}
+
+.info-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.info-btn .img {
+    height: 24px;
+    width: 24px;
+    object-fit: cover;
 }
 
 .display-none {
