@@ -37,6 +37,7 @@ class World {
      */
     run() {
         setStoppableInterval(() => {
+            this.isGameOver();
             this.checkCollisions();
             this.checkThrowObjects();
         }, 100);
@@ -295,5 +296,25 @@ class World {
     flipImageBack(mo) {
         mo.posX = mo.posX * -1;
         this.ctx.restore();
+    }
+
+
+    isGameOver() {
+        if (this.character.isDead() || this.level.endboss.isDead()) {
+            setTimeout(() => {
+                stopGame();
+                allIntervals = [];
+                document.getElementById('game-ends').classList.remove('display-none');
+                if (this.character.isDead()) {
+                    document.getElementById('game-ends').classList.add('endscreen-boss');
+                }
+                if (this.level.endboss.isDead()) {
+                    document.getElementById('game-ends').classList.add('endscreen-pepe');
+                }
+                this.canvas.classList.add('display-none');
+                document.getElementById('info-btns-container').classList.add('display-none');
+                document.getElementById('play-btns-container').classList.add('display-none');
+            }, 2000);
+        }
     }
 }

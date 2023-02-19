@@ -39,8 +39,19 @@ function startGame() {
 
 
 function restartGame() {
-    init();
-    startGame();
+    document.getElementById('restart-btn').classList.add('display-none');
+    document.getElementById('loading-btn').classList.remove('display-none');
+    setTimeout(() => {
+        init();
+        startGame();
+        document.getElementById('restart-btn').classList.remove('display-none');
+        document.getElementById('loading-btn').classList.add('display-none');
+        document.getElementById('game-ends').classList.add('display-none');
+        document.getElementById('game-ends').classList.remove('endscreen-boss');
+        document.getElementById('game-ends').classList.remove('endscreen-pepe');
+        document.getElementById('info-btns-container').classList.remove('display-none');
+        document.getElementById('play-btns-container').classList.remove('display-none');
+    }, 1500);
 }
 
 
