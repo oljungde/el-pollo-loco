@@ -299,22 +299,33 @@ class World {
     }
 
 
+    /**
+     * checks if pepe or the endboss is dead, stops the game animations and clear the array of all stoped intervals
+     */
     isGameOver() {
         if (this.character.isDead() || this.level.endboss.isDead()) {
             setTimeout(() => {
                 stopGame();
                 allIntervals = [];
                 document.getElementById('game-ends').classList.remove('display-none');
-                if (this.character.isDead()) {
-                    document.getElementById('game-ends').classList.add('endscreen-boss');
-                }
-                if (this.level.endboss.isDead()) {
-                    document.getElementById('game-ends').classList.add('endscreen-pepe');
-                }
+                this.whoWins();
                 this.canvas.classList.add('display-none');
                 document.getElementById('info-btns-container').classList.add('display-none');
                 document.getElementById('play-btns-container').classList.add('display-none');
             }, 2000);
+        }
+    }
+
+
+    /**
+     * choose which endscreen to show, game won or game lost
+     */
+    whoWins() {
+        if (this.character.isDead()) {
+            document.getElementById('game-ends').classList.add('endscreen-boss');
+        }
+        if (this.level.endboss.isDead()) {
+            document.getElementById('game-ends').classList.add('endscreen-pepe');
         }
     }
 }
