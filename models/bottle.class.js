@@ -1,8 +1,8 @@
 class Bottle extends MovableObject {
     height = 75;
     width = 75;
-
     imageToLoad = Math.floor(Math.random() * 2);
+
 
     constructor() {
         super();

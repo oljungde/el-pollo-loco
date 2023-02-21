@@ -62,11 +62,16 @@ class Character extends MovableObject {
     world;
     energy = 100;
     speed = 8;
-    walkingAudio = new Audio('./audio/walking.mp3');
     idleTimeout = 0;
     collectedBottles = [];
     collectedCoins = 0;
     jumpOnEnemy = false;
+    walkingAudio = new Audio('./audio/walking.mp3');
+    hurtAudio = new Audio('./audio/hurt-character.mp3');
+    collectBottleAudio = new Audio('./audio/bottle-collected.mp3');
+    dyingAudio = new Audio('./audio/dying.mp3');
+    jumpAudio = new Audio('./audio/jump.mp3');
+
 
 
     constructor() {
@@ -161,6 +166,7 @@ class Character extends MovableObject {
         if (this.isDead()) {
             this.idleTimeout = 0;
             this.playAnimation(this.IMAGES_DEAD);
+            this.dyingAudio.play();
         }
     }
 
@@ -187,6 +193,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.UP && !this.isAboveGround()) {
             this.idleTimeout = 0;
             this.jump();
+            this.jumpAudio.play();
         }
     }
 

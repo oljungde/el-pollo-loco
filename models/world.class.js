@@ -12,6 +12,10 @@ class World {
     bottlesToThrow = [];
     isBottleThrown = false;
     deadEnemies = [];
+    backgroundAudio = new Audio('./audio/background.mp3');
+    backgroundChickenAudio = new Audio('./audio/chicken-background.mp3');
+    winAudio = new Audio('./audio/win.mp3');
+    lostAudio = new Audio('./audio/lost.mp3');
 
 
     constructor(canvas, keyboard) {
@@ -44,6 +48,20 @@ class World {
     }
 
 
+    playAudio() {
+        this.backgroundAudio.play();
+        this.backgroundAudio.loop = true;
+        this.backgroundChickenAudio.play();
+        this.backgroundChickenAudio.loop = true;
+    }
+
+
+    stopAudio() {
+        this.backgroundAudio.pause();
+        this.backgroundChickenAudio.pause();
+    }
+
+
     /**
      * checks collisions between items in the world
      */
@@ -63,7 +81,10 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (!this.character.jumpOnEnemy && this.character.isColliding(enemy) ||
                 this.character.isColliding(this.level.endboss)) {
-                this.character.hit();
+                if (this.character.energy > 0) {
+                    this.character.hit();
+                    this.character.hurtAudio.play();
+                }
                 console.log('Collision with character, energy', this.character.energy);
                 this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
             };
@@ -77,6 +98,7 @@ class World {
     checkCollisionBottlesToCollect() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if (this.character.isColliding(bottle) && this.character.collectedBottles.length < 10) {
+                this.character.collectBottleAudio.play();
                 this.character.collectedBottles.push(bottle);
                 this.level.bottles.splice(indexOfBottles, 1);
                 this.bottleStatusbar.setBottleValue(this.character.collectedBottles.length);
@@ -103,6 +125,7 @@ class World {
      */
     checkCollisionTrownBottleEndboss(bottle, bottleIndex) {
         if (this.level.endboss.isColliding(bottle)) {
+            bottle.splashAudio.play();
             this.level.endboss.hit();
             this.level.endboss.isCollided = true;
             this.endbossStatusbar.setEnergyValue(this.level.endboss.energy);
@@ -122,6 +145,7 @@ class World {
      */
     checkCollisionThrownBottleGround(bottle, bottleIndex) {
         if (!bottle.isAboveGround()) {
+            bottle.splashAudio.play();
             setTimeout(() => {
                 this.bottlesToThrow.splice(bottleIndex);
                 this.isBottleThrown = false;
@@ -136,6 +160,7 @@ class World {
     checkCollisionCoinsCharacter() {
         this.level.coins.forEach((coin, indexOfCoins) => {
             if (this.character.isColliding(coin)) {
+                coin.coinCollectedAudio.play();
                 this.level.coins.splice(indexOfCoins, 1);
                 this.character.collectedCoins++;
                 console.log(this.character.collectedCoins);
@@ -323,9 +348,11 @@ class World {
     whoWins() {
         if (this.character.isDead()) {
             document.getElementById('game-ends').classList.add('endscreen-boss');
+            this.lostAudio.play();
         }
         if (this.level.endboss.isDead()) {
             document.getElementById('game-ends').classList.add('endscreen-pepe');
+            this.winAudio.play();
         }
     }
 }

@@ -3,10 +3,10 @@ class Endboss extends MovableObject {
     height = 343;
     posY = 130;
     energy = 20;
+    speed = 0.01;
     offsetY = 50;
     offsetX = 8;
     isCollided = false;
-
     IMAGES_ALERT = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
         './img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -43,6 +43,10 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G25.png',
         './img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
+    alertAudio = new Audio('./audio/endboss-alert.mp3');
+    attackAudio = new Audio('./audio/endboss-attack.mp3');
+    isHurtAudio = new Audio('./audio/endboss-hurt.mp3');
+    isDeadAudio = new Audio('./audio/endboss-dying.mp3');
 
 
     constructor() {
@@ -52,6 +56,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.playEndbossAudio();
         this.posX = 2500;
     }
 
@@ -61,11 +66,10 @@ class Endboss extends MovableObject {
      */
     animate() {
         setStoppableInterval(() => {
-
             if (this.distanceCharacterEndboss() >= 400 && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ALERT);
             }
-            if (this.distanceCharacterEndboss() < 120 && !this.isHurt()) {
+            if (this.distanceCharacterEndboss() < 100 && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
             if (this.isHurt()) {
@@ -100,11 +104,43 @@ class Endboss extends MovableObject {
      */
     endbossMove() {
         let movingEndboss = setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() < 400)
+            if (this.distanceCharacterEndboss() < 400 && this.distanceCharacterEndboss() > 100)
                 this.moveLeft()
             if (this.distanceCharacterEndboss() > 400) {
                 clearInterval(movingEndboss);
             }
         }, 1000 / 60);
+    }
+
+    playEndbossAudio() {
+        setStoppableInterval(() => {
+            if (this.distanceCharacterEndboss() < 600 && this.distanceCharacterEndboss() > 400) {
+                this.attackAudio.pause();
+                this.attackAudio.currentTime = 0;
+                this.isHurtAudio.pause();
+                this.isHurt.currentTime = 0;
+                this.alertAudio.play();
+            }
+            if (this.distanceCharacterEndboss() < 100 && !this.isHurt()) {
+                this.alertAudio.pause();
+                this.alertAudio.currentTime = 0;
+                this.isHurtAudio.pause();
+                this.isHurtAudio.currentTime = 0;
+                this.attackAudio.play();
+            }
+            if (this.isHurt()) {
+                this.alertAudio.pause();
+                this.alertAudio.currentTime = 0;
+                this.attackAudio.pause();
+                this.attackAudio.currentTime = 0;
+                this.isHurtAudio.play();
+            }
+            if (this.isDead()) {
+                this.alertAudio.pause();
+                this.attackAudio.pause();
+                this.isHurtAudio.pause();
+                this.isDeadAudio.play();
+            }
+        }, 100)
     }
 }

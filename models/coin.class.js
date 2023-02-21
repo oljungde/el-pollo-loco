@@ -5,6 +5,7 @@ class Coin extends MovableObject {
         './img/8_coin/coin_1.png',
         './img/8_coin/coin_2.png'
     ];
+    coinCollectedAudio = new Audio('./audio/coin-collected.mp3');
 
     constructor() {
         super().loadImage('./img/8_coin/coin_1.png');
