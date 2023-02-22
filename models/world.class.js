@@ -71,6 +71,7 @@ class World {
         this.checkCollisionTrownBottles();
         this.checkCollisionCoinsCharacter();
         this.checkCollisionEnemiesCharacter();
+        this.checkCollisionEndbossCharacter()
     }
 
 
@@ -79,16 +80,26 @@ class World {
      */
     checkCollisionEnemiesCharacter() {
         this.level.enemies.forEach((enemy) => {
-            if (!this.character.jumpOnEnemy && this.character.isColliding(enemy) ||
-                this.character.isColliding(this.level.endboss)) {
-                if (this.character.energy > 0) {
-                    this.character.hit();
-                    this.character.hurtAudio.play();
-                }
-                console.log('Collision with character, energy', this.character.energy);
-                this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
+            if (!this.character.jumpOnEnemy && this.character.isColliding(enemy)) {
+                this.characterIsInjured();
             };
         });
+    }
+
+
+    checkCollisionEndbossCharacter() {
+        if (this.character.isColliding(this.level.endboss)) {
+            this.characterIsInjured();
+        }
+    }
+
+
+    characterIsInjured() {
+        if (this.character.energy > 0) {
+            this.character.hit();
+            this.character.hurtAudio.play();
+        }
+        this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
     }
 
 

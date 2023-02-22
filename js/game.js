@@ -125,19 +125,19 @@ function touchEventsStart() {
     document.getElementById('btn-left').addEventListener('touchstart', (ev) => {
         // ev.preventDefault();
         keyboard.LEFT = true;
-    });
+    }, { passive: true });
     document.getElementById('btn-right').addEventListener('touchstart', (ev) => {
         // ev.preventDefault();
         keyboard.RIGHT = true;
-    });
+    }, { passive: true });
     document.getElementById('btn-jump').addEventListener('touchstart', (ev) => {
         // ev.preventDefault();
         keyboard.UP = true;
-    });
+    }, { passive: true });
     document.getElementById('btn-throw').addEventListener('touchstart', (ev) => {
         // ev.preventDefault();
         keyboard.THROW = true;
-    });
+    }, { passive: true });
 }
 
 
@@ -145,19 +145,19 @@ function touchEventsEnd() {
     document.getElementById('btn-left').addEventListener('touchend', (ev) => {
         // ev.preventDefault();
         keyboard.LEFT = false;
-    });
+    }, { passive: true });
     document.getElementById('btn-right').addEventListener('touchend', (ev) => {
         // ev.preventDefault();
         keyboard.RIGHT = false;
-    });
+    }, { passive: true });
     document.getElementById('btn-jump').addEventListener('touchend', (ev) => {
         // ev.preventDefault();
         keyboard.UP = false;
-    });
+    }, { passive: true });
     document.getElementById('btn-throw').addEventListener('touchend', (ev) => {
         // ev.preventDefault();
         keyboard.THROW = false;
-    });
+    }, { passive: true });
 }
 
 

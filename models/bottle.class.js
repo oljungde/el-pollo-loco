@@ -8,7 +8,7 @@ class Bottle extends MovableObject {
         super();
         this.randomImageLoad();
         this.posY = 375;
-        this.posX = 200 + Math.random() * 1000;
+        this.posX = 300 + Math.random() * 1000;
     }
 
 
