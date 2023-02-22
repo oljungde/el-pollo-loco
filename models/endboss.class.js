@@ -57,7 +57,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.playEndbossAudio();
-        this.posX = 2500;
+        this.posX = 3100;
     }
 
 
