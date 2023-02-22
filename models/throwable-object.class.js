@@ -13,6 +13,9 @@ class ThrowableObject extends Bottle {
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
+    speed = 42;
+    speedY = 30;
+    acceleration = 2.25;
     splashAudio = new Audio('./audio/bottle-splash.mp3');
 
 
@@ -46,19 +49,18 @@ class ThrowableObject extends Bottle {
      */
     throw() {
         if (!world.isBottleThrown) {
-            this.speedY = 30;
             this.applyGravity();
             setStoppableInterval(() => {
                 if (this.speed == 0) {
                     this.posX += 0;
                 }
                 if (!world.character.otherDirection) {
-                    this.posX += 10;
+                    this.posX += 8;
                 }
                 if (world.character.otherDirection) {
-                    this.posX -= 10;
+                    this.posX -= 8;
                 }
-            }, 50);
+            }, 1000 / 40);
         }
     }
 }

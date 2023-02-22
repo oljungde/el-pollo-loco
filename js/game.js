@@ -9,7 +9,6 @@ function init() {
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    console.log('My character is', world.character);
     touchEventsStart();
     touchEventsEnd();
 }

@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 1.5;
+    acceleration = 3;
     energy;
     lastHit = 0;
 
@@ -41,7 +41,7 @@ class MovableObject extends DrawableObject {
      * moves object in the air for jumping
      */
     jump() {
-        this.speedY = 25;
+        this.speedY = 30;
     }
 
 
@@ -54,7 +54,7 @@ class MovableObject extends DrawableObject {
                 this.posY -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25);
+        }, 1000 / 30);
     }
 
 
@@ -63,7 +63,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return this.posY < 365;
         } else {
-            return this.posY < 150;
+            return this.posY < 125;
         }
     }
 

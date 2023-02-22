@@ -174,7 +174,6 @@ class World {
                 coin.coinCollectedAudio.play();
                 this.level.coins.splice(indexOfCoins, 1);
                 this.character.collectedCoins++;
-                console.log(this.character.collectedCoins);
                 this.coinStatusbar.setCoinValue(this.character.collectedCoins);
             }
         });
@@ -302,11 +301,9 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
         mo.drawFrameOffset(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

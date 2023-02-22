@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    posY = 160;
+    posY = 140;
     offsetY = 120;
     offsetX = 80;
     IMAGES_WALKING = [
@@ -62,6 +62,7 @@ class Character extends MovableObject {
     world;
     energy = 100;
     speed = 8;
+    speedY = 4;
     idleTimeout = 0;
     collectedBottles = [];
     collectedCoins = 0;
@@ -124,7 +125,7 @@ class Character extends MovableObject {
      * moves the character to left
      */
     characterMoveLeft() {
-        if (this.world.keyboard.LEFT && this.posX > 102) {
+        if (this.world.keyboard.LEFT && this.posX > 110) {
             this.moveLeft();
             this.otherDirection = true;
             this.walkingAudio.play();
