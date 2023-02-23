@@ -44,7 +44,7 @@ class World {
             this.isGameOver();
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 100);
+        }, 1000 / 60);
     }
 
 

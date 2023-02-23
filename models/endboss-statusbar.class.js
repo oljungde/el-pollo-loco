@@ -7,7 +7,7 @@ class EndbossStatusbar extends DrawableObject {
         './img/7_statusbars/2_statusbar_endboss/1_statusbar_endboss/80.png',
         './img/7_statusbars/2_statusbar_endboss/1_statusbar_endboss/100.png',
     ];
-    energyValue = 20;
+    energyValue = 80;
 
 
     constructor() {
@@ -36,15 +36,15 @@ class EndbossStatusbar extends DrawableObject {
      * @returns fill value of statusbar 
      */
     resolveImageIndex() {
-        if (this.energyValue == 20) {
+        if (this.energyValue == 80) {
             return 5;
-        } else if (this.energyValue >= 16) {
+        } else if (this.energyValue >= 64) {
             return 4;
-        } else if (this.energyValue >= 12) {
+        } else if (this.energyValue >= 48) {
             return 3;
-        } else if (this.energyValue >= 8) {
+        } else if (this.energyValue >= 32) {
             return 2;
-        } else if (this.energyValue >= 4) {
+        } else if (this.energyValue >= 16) {
             return 1;
         } else {
             return 0;

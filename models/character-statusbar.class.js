@@ -36,15 +36,15 @@ class CharacterStatusbar extends DrawableObject {
     * @returns fill value of statusbar 
     */
     resolveImageIndex() {
-        if (this.energyValue == 100) {
+        if (this.energyValue == 300) {
             return 5;
-        } else if (this.energyValue > 80) {
+        } else if (this.energyValue > 240) {
             return 4;
-        } else if (this.energyValue > 60) {
+        } else if (this.energyValue > 180) {
             return 3;
-        } else if (this.energyValue > 40) {
+        } else if (this.energyValue > 120) {
             return 2;
-        } else if (this.energyValue > 20) {
+        } else if (this.energyValue > 60) {
             return 1;
         } else {
             return 0;
