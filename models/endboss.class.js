@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     height = 343;
     posY = 100;
     energy = 60;
-    speed = 0.01;
+    speed = 0.12;
     offsetY = 50;
     offsetX = 80;
     isCollided = false;
@@ -85,7 +85,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_WALK);
                 this.endbossMove();
             }
-        }, 500);
+        }, 250);
     }
 
 
@@ -102,7 +102,7 @@ class Endboss extends MovableObject {
      */
     endbossMove() {
         let movingEndboss = setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() < 400 && this.distanceCharacterEndboss() > 100)
+            if (this.distanceCharacterEndboss() < 400 && this.distanceCharacterEndboss() > 100 && !this.isDead())
                 this.moveLeft()
             if (this.distanceCharacterEndboss() > 400) {
                 clearInterval(movingEndboss);
