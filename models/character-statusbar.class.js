@@ -17,7 +17,7 @@ class CharacterStatusbar extends DrawableObject {
         this.height = 53;
         this.posX = 8;
         this.posY = 0;
-        this.setEnergyValue(100);
+        this.setEnergyValue(300);
     }
 
 

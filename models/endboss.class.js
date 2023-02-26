@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
     width = 400;
     height = 343;
     posY = 100;
-    energy = 60;
+    energy = 80;
     speed = 0.12;
     offsetY = 50;
     offsetX = 80;
@@ -112,33 +112,34 @@ class Endboss extends MovableObject {
 
     playEndbossAudio() {
         setStoppableInterval(() => {
-            if (this.distanceCharacterEndboss() < 600 && this.distanceCharacterEndboss() > 400) {
+
+            if (this.isDead()) {
+                this.alertAudio.pause();
+                this.alertAudio.currentTime = 0;
+                this.attackAudio.pause();
+                this.attackAudio.currentTime = 0;
+                this.isHurtAudio.pause();
+                this.isHurtAudio.currentTime = 0;
+                this.isDeadAudio.play();
+            } else if (this.isHurt()) {
+                this.alertAudio.pause();
+                this.alertAudio.currentTime = 0;
+                this.attackAudio.pause();
+                this.attackAudio.currentTime = 0;
+                this.isHurtAudio.play();
+            } else if (this.distanceCharacterEndboss() < 100 && !this.isHurt()) {
+                this.alertAudio.pause();
+                this.alertAudio.currentTime = 0;
+                this.isHurtAudio.pause();
+                this.isHurtAudio.currentTime = 0;
+                this.attackAudio.play();
+            } else if (this.distanceCharacterEndboss() < 600 && this.distanceCharacterEndboss() > 400) {
                 this.attackAudio.pause();
                 this.attackAudio.currentTime = 0;
                 this.isHurtAudio.pause();
                 this.isHurt.currentTime = 0;
                 this.alertAudio.play();
             }
-            if (this.distanceCharacterEndboss() < 100 && !this.isHurt()) {
-                this.alertAudio.pause();
-                this.alertAudio.currentTime = 0;
-                this.isHurtAudio.pause();
-                this.isHurtAudio.currentTime = 0;
-                this.attackAudio.play();
-            }
-            if (this.isHurt()) {
-                this.alertAudio.pause();
-                this.alertAudio.currentTime = 0;
-                this.attackAudio.pause();
-                this.attackAudio.currentTime = 0;
-                this.isHurtAudio.play();
-            }
-            if (this.isDead()) {
-                this.alertAudio.pause();
-                this.attackAudio.pause();
-                this.isHurtAudio.pause();
-                this.isDeadAudio.play();
-            }
-        }, 100)
+        }, 150)
     }
 }
