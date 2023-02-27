@@ -14,7 +14,7 @@ class World {
     deadEnemies = [];
     backgroundAudio = new Audio('./audio/background.mp3');
     backgroundChickenAudio = new Audio('./audio/chicken-background.mp3');
-    winAudio = new Audio('./audio/win.mp3');
+    winAudio = new Audio('./audio/win2.mp3');
     lostAudio = new Audio('./audio/lost.mp3');
 
 

@@ -13,6 +13,14 @@ function init() {
     touchEventsEnd();
 }
 
+window.addEventListener('load', () => {
+    document.getElementById('loader-box').classList.add('display-none');
+    document.getElementById('game').classList.remove('display-none');
+    document.getElementById('startscreen').classList.remove('display-none');
+    document.getElementById('info-btns-container').classList.remove('display-none');
+    document.getElementById('play-btns-container').classList.remove('display-none');
+});
+
 
 /**
  * Creates an interval and pushes in an array, so it is possible to all invals in this array
