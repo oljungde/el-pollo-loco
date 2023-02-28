@@ -6,6 +6,7 @@ class DrawableObject {
     width = 150;
     imageCache = {};
     currentImage = 0;
+    assetsAreLoaded = false;
 
 
     /**
@@ -15,8 +16,6 @@ class DrawableObject {
     loadImage(path) {
         return new Promise((resolve, reject) => {
             this.img = new Image();
-            this.img.onload = () => resolve(this.img.height);
-            this.img.onerror = reject;
             this.img.src = path;
             console.log(path);
         });
@@ -28,7 +27,13 @@ class DrawableObject {
      * @param {object} ctx is the context of the canvas
      */
     draw(ctx) {
-        ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
+        try {
+            ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
+        } catch (e) {
+            console.warn('Error loading image ', e);
+            console.log('Could not load image , ', this.img.src);
+        }
+
     }
 
 
@@ -54,14 +59,41 @@ class DrawableObject {
         }
     }
 
+    async loadImages(imageCache) {
+        for (let i = 0; i < imageCache.length; i++) {
+            const path = imageCache[i];
+            await this.loadImageFromPath(path);
+            console.log('loaded ' + path)
+        }
+    }
+
 
     /**
  * loads all images in the arry imageCache of one object for animation
  * @param {array} imageCache is the array of all images from one movable object
  */
-    async loadImages(imageCache) {
-        for (let i = 0; i < imageCache.length; i++) {
-            await this.loadImage(path);
+    async loadImageFromPath(path) {
+        return new Promise((resolve, reject) => {
+            let img = new Image();
+            img.onload = () => {
+                this.imageCache[path].loaded = true;
+                this.imageCache[path].error = false;
+                resolve();
+            };
+            img.onerror = () => {
+                this.imageCache[path].loaded = true;
+                this.imageCache[path].error = truth;
+                reject(`Image ${path} for ${typeof this} could not be loaded`);
+            };
+            this.imageCache[path] = { img, loaded: false, error: false };
+            img.src = path;
+        });
+    }
+
+
+    async loadAllImages(images) {
+        for (const status in images) {
+            await this.loadImages(images[status]);
         }
     }
 }

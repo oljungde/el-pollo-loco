@@ -39,14 +39,14 @@ function setStoppableInterval(fn, time) {
 function startGame() {
     startscreen = document.getElementById('startscreen');
     world.character.animate();
-    world.level.endboss.animate();
-    world.level.enemies.forEach(enemy => {
-        enemy.animate();
-    });
-    world.level.clouds.forEach(cloud => {
-        cloud.animate();
-    });
-    world.playAudio();
+    // world.level.endboss.animate();
+    // world.level.enemies.forEach(enemy => {
+    //     enemy.animate();
+    // });
+    // world.level.clouds.forEach(cloud => {
+    //     cloud.animate();
+    // });
+    // world.playAudio();
     canvas.classList.remove('display-none');
     startscreen.classList.add('display-none');
     document.getElementById('btn-info').classList.add('display-none');
