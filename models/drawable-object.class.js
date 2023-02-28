@@ -13,8 +13,13 @@ class DrawableObject {
      * @param {string} path of the image from the object to show
      */
     loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
+        return new Promise((resolve, reject) => {
+            this.img = new Image();
+            this.img.onload = () => resolve(this.img.height);
+            this.img.onerror = reject;
+            this.img.src = path;
+            console.log(path);
+        });
     }
 
 
@@ -54,11 +59,9 @@ class DrawableObject {
  * loads all images in the arry imageCache of one object for animation
  * @param {array} imageCache is the array of all images from one movable object
  */
-    loadImages(imageCache) {
-        imageCache.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
+    async loadImages(imageCache) {
+        for (let i = 0; i < imageCache.length; i++) {
+            await this.loadImage(path);
+        }
     }
 }

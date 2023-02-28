@@ -77,13 +77,20 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('./img/2_character_pepe/1_idle/idle/I-1.png');
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_DEAD);
-        this.loadImages(this.IMAGES_IDLE);
-        this.loadImages(this.IMAGES_SLEEPING);
+        (async () => { await this.loadCharacter(); });
         this.applyGravity();
+    }
+
+
+    async loadCharacter() {
+        document.getElementById('loader-box').classList.remove('display-none');
+        await this.loadImages(this.IMAGES_WALKING);
+        await this.loadImages(this.IMAGES_JUMPING);
+        await this.loadImages(this.IMAGES_HURT);
+        await this.loadImages(this.IMAGES_DEAD);
+        await this.loadImages(this.IMAGES_IDLE);
+        await this.loadImages(this.IMAGES_SLEEPING);
+        document.getElementById('loader-box').classList.add('display-none');
     }
 
 
