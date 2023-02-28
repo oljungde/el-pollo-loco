@@ -1,15 +1,17 @@
 class Coin extends MovableObject {
     height = 60;
     width = 60;
-    IMAGES_COINS = [
-        './img/8_coin/coin_1.png',
-        './img/8_coin/coin_2.png'
-    ];
+    IMAGES = {
+        IMAGES_COINS: [
+            './img/8_coin/coin_1.png',
+            './img/8_coin/coin_2.png'
+        ]
+    }
     coinCollectedAudio = new Audio('./audio/coin-collected.mp3');
 
     constructor() {
         super().loadImage('./img/8_coin/coin_1.png');
-        this.loadImages(this.IMAGES_COINS);
+        super.loadAllImages(this.IMAGES).then(this.assetsAreLoaded = true);
         this.posY = 80 + Math.random() * 100;
         this.posX = 200 + Math.random() * 1000;
         this.animate();
@@ -21,7 +23,7 @@ class Coin extends MovableObject {
      */
     animate() {
         setStoppableInterval(() => {
-            this.playAnimation(this.IMAGES_COINS);
+            this.playAnimation(this.IMAGES.IMAGES_COINS);
         }, 400)
     }
 }

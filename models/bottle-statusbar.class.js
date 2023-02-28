@@ -1,17 +1,19 @@
 class BottleStatusbar extends DrawableObject {
-    IMAGES_BOTTLE_STATUSBAR = [
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png',
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png',
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png',
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png',
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png',
-        './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png'
-    ];
+    IMAGES = {
+        IMAGES_BOTTLE_STATUSBAR: [
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/0.png',
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/20.png',
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/40.png',
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/60.png',
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/80.png',
+            './img/7_statusbars/1_statusbar/3_statusbar_bottle/orange/100.png'
+        ]
+    }
 
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_BOTTLE_STATUSBAR);
+        super.loadAllImages(this.IMAGES).then(this.assetsAreLoaded = true);
         this.width = 198;
         this.height = 53;
         this.posX = 8;
@@ -26,8 +28,8 @@ class BottleStatusbar extends DrawableObject {
      */
     setBottleValue(bottleValue) {
         this.bottleValue = bottleValue;
-        let imagePath = this.IMAGES_BOTTLE_STATUSBAR[this.resolveImageIndex()]
-        this.img = this.imageCache[imagePath]
+        let imagePath = this.IMAGES.IMAGES_BOTTLE_STATUSBAR[this.resolveImageIndex()]
+        this.img = this.imageCache[imagePath];
     }
 
 

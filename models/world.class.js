@@ -42,7 +42,7 @@ class World {
     run() {
         setStoppableInterval(() => {
             // this.isGameOver();
-            // this.checkCollisions();
+            this.checkCollisions();
             // this.checkThrowObjects();
         }, 1000 / 60);
     }
@@ -71,7 +71,7 @@ class World {
         // this.checkCollisionTrownBottles();
         // this.checkCollisionCoinsCharacter();
         // this.checkCollisionEnemiesCharacter();
-        // this.checkCollisionEndbossCharacter()
+        this.checkCollisionEndbossCharacter()
     }
 
 
@@ -256,10 +256,10 @@ class World {
         this.addObjectsToCanvas(this.level.backgroundObjects);
         this.addObjectsToCanvas(this.level.clouds);
         this.addToCanvas(this.character);
-        // this.addToCanvas(this.level.endboss);
-        // this.addObjectsToCanvas(this.level.enemies);
+        this.addToCanvas(this.level.endboss);
+        this.addObjectsToCanvas(this.level.enemies);
         this.addObjectsToCanvas(this.level.bottles);
-        // this.addObjectsToCanvas(this.level.coins);
+        this.addObjectsToCanvas(this.level.coins);
         // this.drawStatusBars();
         this.addObjectsToCanvas(this.bottlesToThrow);
         this.addObjectsToCanvas(this.deadEnemies);
