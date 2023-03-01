@@ -28,8 +28,9 @@ class BottleStatusbar extends DrawableObject {
      */
     setBottleValue(bottleValue) {
         this.bottleValue = bottleValue;
-        let imagePath = this.IMAGES.IMAGES_BOTTLE_STATUSBAR[this.resolveImageIndex()]
-        this.img = this.imageCache[imagePath];
+        let imagePath = this.IMAGES.IMAGES_BOTTLE_STATUSBAR[this.resolveImageIndex()];
+        this.img = new Image();
+        this.img.src = imagePath;
     }
 
 

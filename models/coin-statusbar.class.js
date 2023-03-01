@@ -26,8 +26,9 @@ class CoinStatusbar extends DrawableObject {
      */
     setCoinValue(coinValue) {
         this.coinValue = coinValue;
-        let imagePath = this.IMAGES_COIN_STATUSBAR[this.resolveImageIndex()]
-        this.img = this.imageCache[imagePath]
+        let imagePath = this.IMAGES_COIN_STATUSBAR[this.resolveImageIndex()];
+        this.img = new Image();
+        this.img.src = imagePath;
     }
 
 

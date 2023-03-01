@@ -29,8 +29,9 @@ class EndbossStatusbar extends DrawableObject {
      */
     setEnergyValue(energyValue) {
         this.energyValue = energyValue;
-        let imagePath = this.IMAGES.IMAGES_ENDBOSS_STATUSBAR[this.resolveImageIndex()]
-        this.img = this.imageCache[imagePath]
+        let imagePath = this.IMAGES.IMAGES_ENDBOSS_STATUSBAR[this.resolveImageIndex()];
+        this.img = new Image();
+        this.img.src = imagePath;
     }
 
 

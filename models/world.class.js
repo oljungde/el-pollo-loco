@@ -41,9 +41,9 @@ class World {
      */
     run() {
         setStoppableInterval(() => {
-            // this.isGameOver();
+            this.isGameOver();
             this.checkCollisions();
-            // this.checkThrowObjects();
+            this.checkThrowObjects();
         }, 1000 / 60);
     }
 
@@ -66,11 +66,11 @@ class World {
      * checks collisions between items in the world
      */
     checkCollisions() {
-        // this.checkCollisionJumpOnEnemies();
-        // this.checkCollisionBottlesToCollect();
-        // this.checkCollisionTrownBottles();
-        // this.checkCollisionCoinsCharacter();
-        // this.checkCollisionEnemiesCharacter();
+        this.checkCollisionJumpOnEnemies();
+        this.checkCollisionBottlesToCollect();
+        this.checkCollisionTrownBottles();
+        this.checkCollisionCoinsCharacter();
+        this.checkCollisionEnemiesCharacter();
         this.checkCollisionEndbossCharacter()
     }
 
@@ -260,7 +260,7 @@ class World {
         this.addObjectsToCanvas(this.level.enemies);
         this.addObjectsToCanvas(this.level.bottles);
         this.addObjectsToCanvas(this.level.coins);
-        // this.drawStatusBars();
+        this.drawStatusBars();
         this.addObjectsToCanvas(this.bottlesToThrow);
         this.addObjectsToCanvas(this.deadEnemies);
         this.ctx.translate(-this.cameraPosX, 0);
@@ -336,17 +336,17 @@ class World {
      * checks if pepe or the endboss is dead, stops the game animations and clear the array of all stoped intervals
      */
     isGameOver() {
-        // if (this.character.isDead() || this.level.endboss.isDead()) {
-        //     setTimeout(() => {
-        //         stopGame();
-        //         allIntervals = [];
-        //         document.getElementById('game-ends').classList.remove('display-none');
-        //         this.whoWins();
-        //         this.canvas.classList.add('display-none');
-        //         document.getElementById('info-btns-container').classList.add('display-none');
-        //         document.getElementById('play-btns-container').classList.add('display-none');
-        //     }, 2000);
-        // }
+        if (this.character.isDead() || this.level.endboss.isDead()) {
+            setTimeout(() => {
+                stopGame();
+                allIntervals = [];
+                document.getElementById('game-ends').classList.remove('display-none');
+                this.whoWins();
+                this.canvas.classList.add('display-none');
+                document.getElementById('info-btns-container').classList.add('display-none');
+                document.getElementById('play-btns-container').classList.add('display-none');
+            }, 2000);
+        }
     }
 
 
@@ -354,13 +354,13 @@ class World {
      * choose which endscreen to show, game won or game lost
      */
     whoWins() {
-        // if (this.character.isDead()) {
-        //     document.getElementById('game-ends').classList.add('endscreen-boss');
-        //     this.lostAudio.play();
-        // }
-        // if (this.level.endboss.isDead()) {
-        //     document.getElementById('game-ends').classList.add('endscreen-pepe');
-        //     this.winAudio.play();
-        // }
+        if (this.character.isDead()) {
+            document.getElementById('game-ends').classList.add('endscreen-boss');
+            this.lostAudio.play();
+        }
+        if (this.level.endboss.isDead()) {
+            document.getElementById('game-ends').classList.add('endscreen-pepe');
+            this.winAudio.play();
+        }
     }
 }
