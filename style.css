@@ -237,12 +237,19 @@ canvas {
     }
 }
 
-@media only screen and (max-height: 480px) {
+@media only screen and (max-height: 550px) {
     h1 {
         display: none;
     }
 
+    .startscreen,
+    .endscreen {
+        height: 100%;
+        width: 100%;
+    }
+
     canvas {
         height: 100vh;
+        object-fit: contain;
     }
 }

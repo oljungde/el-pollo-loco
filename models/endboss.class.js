@@ -53,7 +53,7 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage('./img/4_enemie_boss_chicken/2_alert/G5.png');
-        super.loadAllImages(this.IMAGES).then(this.assetsAreLoaded = true);
+        super.loadAllImages(this.IMAGES);
         // this.loadImages(this.IMAGES_ALERT);
         // this.loadImages(this.IMAGES_WALK);
         // this.loadImages(this.IMAGES_ATTACK);

@@ -1,17 +1,19 @@
 class CoinStatusbar extends DrawableObject {
-    IMAGES_COIN_STATUSBAR = [
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png',
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png',
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png',
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png',
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png',
-        './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png',
-    ];
+    IMAGES = {
+        IMAGES_COIN_STATUSBAR: [
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png',
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png',
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png',
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png',
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png',
+            './img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png',
+        ]
+    }
 
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_COIN_STATUSBAR);
+        super.loadAllImages(this.IMAGES);
         this.width = 198;
         this.height = 53;
         this.posX = 8;
@@ -26,7 +28,7 @@ class CoinStatusbar extends DrawableObject {
      */
     setCoinValue(coinValue) {
         this.coinValue = coinValue;
-        let imagePath = this.IMAGES_COIN_STATUSBAR[this.resolveImageIndex()];
+        let imagePath = this.IMAGES.IMAGES_COIN_STATUSBAR[this.resolveImageIndex()];
         this.img = new Image();
         this.img.src = imagePath;
     }

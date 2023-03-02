@@ -6,7 +6,6 @@ class DrawableObject {
     width = 150;
     imageCache = {};
     currentImage = 0;
-    assetsAreLoaded = false;
 
 
     /**
@@ -17,7 +16,7 @@ class DrawableObject {
         return new Promise((resolve, reject) => {
             this.img = new Image();
             this.img.src = path;
-            console.log(path);
+            // console.log(path);
         });
     }
 
@@ -63,7 +62,11 @@ class DrawableObject {
         for (let i = 0; i < imageCache.length; i++) {
             const path = imageCache[i];
             await this.loadImageFromPath(path);
-            console.log('loaded ' + path)
+            // console.log('loaded ' + path)
+
+            if (path.includes('./img/2_character_pepe/1_idle/long_idle/I-20.png')) {
+                console.log('Alles fertig geladen!')
+            }
         }
     }
 

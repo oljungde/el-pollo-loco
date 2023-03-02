@@ -9,7 +9,6 @@ function init() {
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    loaded();
     touchEventsStart();
     touchEventsEnd();
 }
@@ -21,14 +20,6 @@ window.addEventListener('load', () => {
     document.getElementById('info-btns-container').classList.remove('display-none');
     document.getElementById('play-btns-container').classList.remove('display-none');
 });
-
-
-function loaded() {
-    setInterval(() => {
-        console.log(world.character.assetsAreLoaded);
-    }, 250);
-
-}
 
 
 /**

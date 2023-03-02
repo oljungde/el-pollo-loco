@@ -4,6 +4,8 @@ class World {
     bottleStatusbar = new BottleStatusbar();
     endbossStatusbar = new EndbossStatusbar();
     coinStatusbar = new CoinStatusbar();
+    // testBottle = new ThrowableObject();
+    // testDeadChicken = new DeadChicken();
     level = level1;
     canvas;
     ctx;
