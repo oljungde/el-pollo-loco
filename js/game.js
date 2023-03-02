@@ -9,6 +9,7 @@ function init() {
     initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    loaded();
     touchEventsStart();
     touchEventsEnd();
 }
@@ -20,6 +21,14 @@ window.addEventListener('load', () => {
     document.getElementById('info-btns-container').classList.remove('display-none');
     document.getElementById('play-btns-container').classList.remove('display-none');
 });
+
+
+function loaded() {
+    setInterval(() => {
+        console.log(world.character.assetsAreLoaded);
+    }, 250);
+
+}
 
 
 /**
@@ -40,13 +49,13 @@ function startGame() {
     startscreen = document.getElementById('startscreen');
     world.character.animate();
     world.level.endboss.animate();
-    world.level.enemies.forEach(enemy => {
-        enemy.animate();
-    });
-    world.level.clouds.forEach(cloud => {
-        cloud.animate();
-    });
-    world.playAudio();
+    // world.level.enemies.forEach(enemy => {
+    //     enemy.animate();
+    // });
+    // world.level.clouds.forEach(cloud => {
+    //     cloud.animate();
+    // });
+    // world.playAudio();
     canvas.classList.remove('display-none');
     startscreen.classList.add('display-none');
     document.getElementById('btn-info').classList.add('display-none');
