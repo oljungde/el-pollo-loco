@@ -3,6 +3,7 @@ let startscreen;
 let world;
 let allIntervals = [];
 let keyboard = new Keyboard();
+let allAssetsAreLoaded = false;
 
 
 function init() {
@@ -15,8 +16,6 @@ function init() {
 
 window.addEventListener('load', () => {
     document.getElementById('loader-box').classList.add('display-none');
-    document.getElementById('game').classList.remove('display-none');
-    document.getElementById('startscreen').classList.remove('display-none');
     document.getElementById('info-btns-container').classList.remove('display-none');
     document.getElementById('play-btns-container').classList.remove('display-none');
 });
@@ -36,34 +35,42 @@ function setStoppableInterval(fn, time) {
 /**
  * starts the game after initilisation of the world
  */
-function startGame() {
-    startscreen = document.getElementById('startscreen');
-    world.character.animate();
-    world.level.endboss.animate();
-    // world.level.enemies.forEach(enemy => {
-    //     enemy.animate();
-    // });
-    // world.level.clouds.forEach(cloud => {
-    //     cloud.animate();
-    // });
-    // world.playAudio();
-    canvas.classList.remove('display-none');
-    startscreen.classList.add('display-none');
-    document.getElementById('btn-info').classList.add('display-none');
+async function startGame() {
+    document.getElementById('loader-box').classList.remove('display-none');
+    let startGameAnimations = setInterval(() => {
+        if (allAssetsAreLoaded) {
+            document.getElementById('loader-box').classList.add('display-none');
+            world.character.animate();
+            world.level.endboss.animate();
+            world.level.enemies.forEach(enemy => {
+                enemy.animate();
+            });
+            world.level.clouds.forEach(cloud => {
+                cloud.animate();
+            });
+            world.playAudio();
+            canvas.classList.remove('display-none');
+            document.getElementById('startscreen').classList.add('display-none');
+            document.getElementById('btn-info').classList.add('display-none');
+            clearInterval(startGameAnimations);
+            allAssetsAreLoaded = false;
+        }
+    }, 200);
 }
 
 
 /**
  * function to restart the game after one run
  */
-function restartGame() {
-    document.getElementById('restart-btn').classList.add('display-none');
-    document.getElementById('loading-btn').classList.remove('display-none');
-    setTimeout(() => {
-        init();
-        startGame();
-        resetEndscreen();
-    }, 1500);
+async function restartGame() {
+    init();
+    await startGame();
+    document.getElementById('character_lost').style.removeProperty('visibility');
+    document.getElementById('restart-btn-boss').classList.add('display-none');
+    document.getElementById('character_won').style.removeProperty('visibility');
+    document.getElementById('restart-btn-character').classList.add('display-none');
+    document.getElementById('info-btns-container').classList.remove('display-none');
+    document.getElementById('play-btns-container').classList.remove('display-none');
 }
 
 
@@ -71,13 +78,7 @@ function restartGame() {
  * function to reset the endscreen, blending off endscreen an blend in the game navigation for touchdevices
  */
 function resetEndscreen() {
-    document.getElementById('restart-btn').classList.remove('display-none');
-    document.getElementById('loading-btn').classList.add('display-none');
-    document.getElementById('game-ends').classList.add('display-none');
-    document.getElementById('game-ends').classList.remove('endscreen-boss');
-    document.getElementById('game-ends').classList.remove('endscreen-pepe');
-    document.getElementById('info-btns-container').classList.remove('display-none');
-    document.getElementById('play-btns-container').classList.remove('display-none');
+
 }
 
 

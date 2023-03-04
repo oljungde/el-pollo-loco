@@ -342,7 +342,7 @@ class World {
             setTimeout(() => {
                 stopGame();
                 allIntervals = [];
-                document.getElementById('game-ends').classList.remove('display-none');
+                // document.getElementById('game-ends').classList.remove('display-none');
                 this.whoWins();
                 this.canvas.classList.add('display-none');
                 document.getElementById('info-btns-container').classList.add('display-none');
@@ -357,12 +357,17 @@ class World {
      */
     whoWins() {
         if (this.character.isDead()) {
-            document.getElementById('game-ends').classList.add('endscreen-boss');
+            document.getElementById('character_lost').style.visibility = 'visible';
             this.lostAudio.play();
-        }
-        if (this.level.endboss.isDead()) {
-            document.getElementById('game-ends').classList.add('endscreen-pepe');
+            setTimeout(() => {
+                document.getElementById('restart-btn-boss').classList.remove('display-none');
+            }, 5000);
+        } else {
+            document.getElementById('character_won').style.visibility = 'visible';
             this.winAudio.play();
+            setTimeout(() => {
+                document.getElementById('restart-btn-character').classList.remove('display-none');
+            }, 5000);
         }
     }
 }

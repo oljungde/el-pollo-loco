@@ -17,6 +17,7 @@ body {
 
 body {
     font: 16px 'Zabars', serif;
+    /* overflow: hidden; */
 }
 
 .content {
@@ -37,6 +38,7 @@ body {
     height: 560px;
     width: 720px;
     position: relative;
+    border-radius: 16px;
 }
 
 h1 {
@@ -51,7 +53,7 @@ h1 {
 }
 
 .loader-box {
-    background-color: red;
+    background: radial-gradient(circle at 50% 50%, #ffda00, #f3be00, #e5a400, #d58a00, #c37102, #ae5a07, #994409);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -60,19 +62,21 @@ h1 {
     background-size: cover;
     background-position: 50% 50%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2;
 }
 
 .loader {
-    border: 16px solid #f3f3f3;
+    border: 16px solid #994409;
     /* Light grey */
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #ffff77;
     /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    margin-top: 64px;
     animation: spin 2s linear infinite;
 }
 
@@ -100,14 +104,22 @@ h1 {
 .endscreen {
     height: 480px;
     width: 720px;
+    position: absolute;
+    top: 80px;
+    left: 0;
     background-size: cover;
     background-position: 50% 50%;
     display: flex;
     justify-content: center;
+    border-radius: 16px;
 }
 
 .startscreen {
     background-image: url('./img/9_intro_outro_screens/start/startscreen_2-1.png');
+}
+
+.endscreen {
+    visibility: hidden;
 }
 
 .endscreen-boss {
@@ -153,6 +165,7 @@ h1 {
 canvas {
     background-color: black;
     display: block;
+    border-radius: 16px;
 }
 
 .start-btn {

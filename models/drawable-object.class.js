@@ -63,9 +63,9 @@ class DrawableObject {
             const path = imageCache[i];
             await this.loadImageFromPath(path);
             // console.log('loaded ' + path)
-
             if (path.includes('./img/2_character_pepe/1_idle/long_idle/I-20.png')) {
-                console.log('Alles fertig geladen!')
+                console.log('Alles fertig geladen!');
+                allAssetsAreLoaded = true;
             }
         }
     }

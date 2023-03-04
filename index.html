@@ -34,6 +34,7 @@
 <body onload="init()">
     <div id="content" class="content">
         <div id="loader-box" class="loader-box">
+            <h1>El Pollo Loco - Loading...</h1>
             <div class="loader"></div>
         </div>
 
@@ -76,14 +77,17 @@
 
                 <p>To defeat a chick or a chicken you have to jump on it, use the arrow up key.</p>
 
-                <p>To defeat the big rooster you have to throw the salsa bottles you can collect at him, use the "d" key, on a mobile device use theright key in the bottom.</p>
+                <p>To defeat the big rooster you have to throw the salsa bottles, you can collect, at him, use the "d" key, on a mobile device use the right key in the bottom.</p>
 
                 <p>Good luck, you will need it.</p>
             </div>
 
-            <div id="game-ends" class="endscreen display-none">
-                <button id="restart-btn" onclick="restartGame()" class="btn start-btn">Restart</button>
-                <button id="loading-btn" disabled="true" class="btn start-btn display-none">Loading...</button>
+            <div id="character_lost" class="endscreen endscreen-boss">
+                <button id="restart-btn-boss" onclick="restartGame()" class="btn start-btn display-none">Restart</button>
+            </div>
+
+            <div id="character_won" class="endscreen endscreen-pepe">
+                <button id="restart-btn-character" onclick="restartGame()" class="btn start-btn display-none">Restart</button>
             </div>
         </div>
     </div>
