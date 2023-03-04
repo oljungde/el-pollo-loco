@@ -41,14 +41,14 @@ async function startGame() {
         if (allAssetsAreLoaded) {
             document.getElementById('loader-box').classList.add('display-none');
             world.character.animate();
-            world.level.endboss.animate();
-            world.level.enemies.forEach(enemy => {
-                enemy.animate();
-            });
-            world.level.clouds.forEach(cloud => {
-                cloud.animate();
-            });
-            world.playAudio();
+            // world.level.endboss.animate();
+            // world.level.enemies.forEach(enemy => {
+            //     enemy.animate();
+            // });
+            // world.level.clouds.forEach(cloud => {
+            //     cloud.animate();
+            // });
+            // world.playAudio();
             canvas.classList.remove('display-none');
             document.getElementById('startscreen').classList.add('display-none');
             document.getElementById('btn-info').classList.add('display-none');

@@ -17,7 +17,7 @@ body {
 
 body {
     font: 16px 'Zabars', serif;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .content {
@@ -46,13 +46,14 @@ h1 {
     margin: 0;
     font-size: 80px;
     font-weight: normal;
-    color: rgb(56, 22, 9);
+    color: #381609;
     text-align: center;
     letter-spacing: 3px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.loader-box {
+.loader-box,
+.flip-device {
     background: radial-gradient(circle at 50% 50%, #ffda00, #f3be00, #e5a400, #d58a00, #c37102, #ae5a07, #994409);
     height: 100%;
     width: 100%;
@@ -61,18 +62,26 @@ h1 {
     left: 0;
     background-size: cover;
     background-position: 50% 50%;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 16px;
+    font-size: 48px;
+    text-align: center;
     z-index: 2;
+}
+
+.loader-box {
+    display: flex;
+}
+
+.flip-device {
+    display: none
 }
 
 .loader {
     border: 16px solid #994409;
-    /* Light grey */
     border-top: 16px solid #ffff77;
-    /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -245,24 +254,70 @@ canvas {
 }
 
 @media only screen and (max-width: 720px) {
+    .game {
+        width: 100%;
+        height: 100%;
+    }
+
+    .startscreen,
+    .endscreen {
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: initial;
+    }
+
+    .info-btns-container {
+        width: 100%;
+        top: 6px;
+    }
+
+    .play-btns-container {
+        width: 100%;
+    }
+
     canvas {
         width: 100%;
+        border-radius: initial;
     }
 }
 
-@media only screen and (max-height: 550px) {
+@media only screen and (max-height: 560px) {
+    .game {
+        width: 100%;
+        height: 100%;
+    }
+
     h1 {
         display: none;
     }
 
     .startscreen,
     .endscreen {
+        width: 100%;
         height: 100%;
+        top: 0;
+        border-radius: initial;
+    }
+
+    .info-btns-container {
+        width: 100%;
+        top: 6px;
+    }
+
+    .play-btns-container {
         width: 100%;
     }
 
     canvas {
         height: 100vh;
-        object-fit: contain;
+        width: 100%;
+        border-radius: initial;
+    }
+}
+
+@media (max-width: 720px) and (orientation: portrait) {
+    .flip-device {
+        display: flex;
     }
 }
