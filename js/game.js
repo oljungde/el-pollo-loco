@@ -35,23 +35,24 @@ function setStoppableInterval(fn, time) {
 /**
  * starts the game after initilisation of the world
  */
-async function startGame() {
+function startGame() {
     document.getElementById('loader-box').classList.remove('display-none');
     let startGameAnimations = setInterval(() => {
         if (allAssetsAreLoaded) {
             document.getElementById('loader-box').classList.add('display-none');
             world.character.animate();
-            // world.level.endboss.animate();
-            // world.level.enemies.forEach(enemy => {
-            //     enemy.animate();
-            // });
-            // world.level.clouds.forEach(cloud => {
-            //     cloud.animate();
-            // });
-            // world.playAudio();
+            world.level.endboss.animate();
+            world.level.enemies.forEach(enemy => {
+                enemy.animate();
+            });
+            world.level.clouds.forEach(cloud => {
+                cloud.animate();
+            });
+            world.playAudio();
             canvas.classList.remove('display-none');
             document.getElementById('startscreen').classList.add('display-none');
             document.getElementById('btn-info').classList.add('display-none');
+
             clearInterval(startGameAnimations);
             allAssetsAreLoaded = false;
         }
@@ -63,22 +64,23 @@ async function startGame() {
  * function to restart the game after one run
  */
 async function restartGame() {
+    await resetEndscreen();
     init();
-    await startGame();
-    document.getElementById('character_lost').style.removeProperty('visibility');
-    document.getElementById('restart-btn-boss').classList.add('display-none');
-    document.getElementById('character_won').style.removeProperty('visibility');
-    document.getElementById('restart-btn-character').classList.add('display-none');
+    startGame();
     document.getElementById('info-btns-container').classList.remove('display-none');
     document.getElementById('play-btns-container').classList.remove('display-none');
+
 }
 
 
 /**
  * function to reset the endscreen, blending off endscreen an blend in the game navigation for touchdevices
  */
-function resetEndscreen() {
-
+async function resetEndscreen() {
+    document.getElementById('restart-btn-boss').classList.add('display-none');
+    document.getElementById('restart-btn-character').classList.add('display-none');
+    document.getElementById('character_lost').style.removeProperty('visibility');
+    document.getElementById('character_won').style.removeProperty('visibility');
 }
 
 
@@ -131,41 +133,41 @@ window.addEventListener('keyup', (ev) => {
 
 function touchEventsStart() {
     document.getElementById('btn-left').addEventListener('touchstart', (ev) => {
-        // ev.preventDefault();
         keyboard.LEFT = true;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-right').addEventListener('touchstart', (ev) => {
-        // ev.preventDefault();
         keyboard.RIGHT = true;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-jump').addEventListener('touchstart', (ev) => {
-        // ev.preventDefault();
         keyboard.UP = true;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-throw').addEventListener('touchstart', (ev) => {
-        // ev.preventDefault();
         keyboard.THROW = true;
-    }, { passive: true });
+        ev.preventDefault();
+    });
 }
 
 
 function touchEventsEnd() {
     document.getElementById('btn-left').addEventListener('touchend', (ev) => {
-        // ev.preventDefault();
         keyboard.LEFT = false;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-right').addEventListener('touchend', (ev) => {
-        // ev.preventDefault();
         keyboard.RIGHT = false;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-jump').addEventListener('touchend', (ev) => {
-        // ev.preventDefault();
         keyboard.UP = false;
-    }, { passive: true });
+        ev.preventDefault();
+    });
     document.getElementById('btn-throw').addEventListener('touchend', (ev) => {
-        // ev.preventDefault();
         keyboard.THROW = false;
-    }, { passive: true });
+        ev.preventDefault();
+    });
 }
 
 
