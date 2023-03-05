@@ -16,7 +16,6 @@ class DrawableObject {
         return new Promise((resolve, reject) => {
             this.img = new Image();
             this.img.src = path;
-            // console.log(path);
         });
     }
 
@@ -36,35 +35,16 @@ class DrawableObject {
     }
 
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Coin
-            || this instanceof SmallChicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '4';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.posX, this.posY, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
-    drawFrameOffset(ctx) {
-        if (this instanceof Character || this instanceof Endboss || this instanceof Coin) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.posX + this.offsetX / 2, this.posY + this.offsetY, this.width - this.offsetX, this.height - this.offsetY);
-            ctx.stroke();
-        }
-    }
-
+    /**
+     * loads all images of a class asynchronously, when the last image of the character is loaded the variable
+     * allAssetsAreLoaded is set to true
+     * @param {array} imageCache includes all images of a class
+     */
     async loadImages(imageCache) {
         for (let i = 0; i < imageCache.length; i++) {
             const path = imageCache[i];
             await this.loadImageFromPath(path);
-            // console.log('loaded ' + path)
             if (path.includes('./img/2_character_pepe/1_idle/long_idle/I-20.png')) {
-                console.log('Alles fertig geladen!');
                 allAssetsAreLoaded = true;
             }
         }
@@ -72,9 +52,9 @@ class DrawableObject {
 
 
     /**
- * loads all images in the arry imageCache of one object for animation
- * @param {array} imageCache is the array of all images from one movable object
- */
+    * loads all images in the arry imageCache of one object for animation
+    * @param {array} imageCache is the array of all images from one movable object
+    */
     async loadImageFromPath(path) {
         return new Promise((resolve, reject) => {
             let img = new Image();
@@ -94,6 +74,9 @@ class DrawableObject {
     }
 
 
+    /**
+     * @param {JSON} images is the JSON arry with all images to load for a class
+     */
     async loadAllImages(images) {
         for (const status in images) {
             await this.loadImages(images[status]);

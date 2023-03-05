@@ -4,8 +4,6 @@ class World {
     bottleStatusbar = new BottleStatusbar();
     endbossStatusbar = new EndbossStatusbar();
     coinStatusbar = new CoinStatusbar();
-    // testBottle = new ThrowableObject();
-    // testDeadChicken = new DeadChicken();
     level = level1;
     canvas;
     ctx;
@@ -304,8 +302,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-        mo.drawFrameOffset(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -339,10 +335,10 @@ class World {
      */
     isGameOver() {
         if (this.character.isDead() || this.level.endboss.isDead()) {
+            this.character.walkingAudio.pause();
             setTimeout(() => {
                 stopGame();
                 allIntervals = [];
-                // document.getElementById('game-ends').classList.remove('display-none');
                 this.whoWins();
                 this.canvas.classList.add('display-none');
                 document.getElementById('info-btns-container').classList.add('display-none');

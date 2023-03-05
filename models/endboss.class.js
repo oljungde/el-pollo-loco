@@ -54,12 +54,7 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage('./img/4_enemie_boss_chicken/2_alert/G5.png');
         super.loadAllImages(this.IMAGES);
-        // this.loadImages(this.IMAGES_ALERT);
-        // this.loadImages(this.IMAGES_WALK);
-        // this.loadImages(this.IMAGES_ATTACK);
-        // this.loadImages(this.IMAGES_HURT);
-        // this.loadImages(this.IMAGES_DEAD);
-        this.playEndbossAudio();
+        this.endbossAudio();
         this.posX = 3100;
     }
 
@@ -113,36 +108,59 @@ class Endboss extends MovableObject {
         }, 1000 / 60);
     }
 
-    playEndbossAudio() {
-        setStoppableInterval(() => {
 
+    /**
+     * plays and stops several sounds of the endboss
+     */
+    endbossAudio() {
+        setStoppableInterval(() => {
             if (this.isDead()) {
-                this.alertAudio.pause();
-                this.alertAudio.currentTime = 0;
-                this.attackAudio.pause();
-                this.attackAudio.currentTime = 0;
-                this.isHurtAudio.pause();
-                this.isHurtAudio.currentTime = 0;
-                this.isDeadAudio.play();
+                this.audioEndbossDead();
             } else if (this.isHurt()) {
-                this.alertAudio.pause();
-                this.alertAudio.currentTime = 0;
-                this.attackAudio.pause();
-                this.attackAudio.currentTime = 0;
-                this.isHurtAudio.play();
+                this.audioEndbossHurt();
             } else if (this.distanceCharacterEndboss() < 100 && !this.isHurt()) {
-                this.alertAudio.pause();
-                this.alertAudio.currentTime = 0;
-                this.isHurtAudio.pause();
-                this.isHurtAudio.currentTime = 0;
-                this.attackAudio.play();
+                this.audioEndbossAttak();
             } else if (this.distanceCharacterEndboss() < 600 && this.distanceCharacterEndboss() > 400) {
-                this.attackAudio.pause();
-                this.attackAudio.currentTime = 0;
-                this.isHurtAudio.pause();
-                this.isHurt.currentTime = 0;
-                this.alertAudio.play();
+                this.audioEndbossAlert();
             }
         }, 150)
+    }
+
+
+    audioEndbossDead() {
+        this.alertAudio.pause();
+        this.alertAudio.currentTime = 0;
+        this.attackAudio.pause();
+        this.attackAudio.currentTime = 0;
+        this.isHurtAudio.pause();
+        this.isHurtAudio.currentTime = 0;
+        this.isDeadAudio.play();
+    }
+
+
+    audioEndbossHurt() {
+        this.alertAudio.pause();
+        this.alertAudio.currentTime = 0;
+        this.attackAudio.pause();
+        this.attackAudio.currentTime = 0;
+        this.isHurtAudio.play();
+    }
+
+
+    audioEndbossAttak() {
+        this.alertAudio.pause();
+        this.alertAudio.currentTime = 0;
+        this.isHurtAudio.pause();
+        this.isHurtAudio.currentTime = 0;
+        this.attackAudio.play();
+    }
+
+
+    audioEndbossAlert() {
+        this.attackAudio.pause();
+        this.attackAudio.currentTime = 0;
+        this.isHurtAudio.pause();
+        this.isHurt.currentTime = 0;
+        this.alertAudio.play();
     }
 }

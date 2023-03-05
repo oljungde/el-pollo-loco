@@ -61,7 +61,6 @@ class Character extends MovableObject {
             './img/2_character_pepe/1_idle/long_idle/I-20.png',
         ]
     }
-
     world;
     energy = 300;
     speed = 8;
@@ -86,7 +85,7 @@ class Character extends MovableObject {
 
 
     /**
-     * function to animate the character
+     * function to start animations for the character
      */
     animate() {
         this.characterMove();
@@ -150,7 +149,6 @@ class Character extends MovableObject {
      * play animation when character fall to sleep, when he is do nothing for 5 seconds
      */
     characterIdle() {
-        // this.playAnimation(this.IMAGES_IDLE);
         this.playAnimation(this.IMAGES.IMAGES_IDLE);
         this.idleTimeout += 150;
         if (this.idleTimeout >= 5000) {

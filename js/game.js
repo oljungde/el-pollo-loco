@@ -6,6 +6,9 @@ let keyboard = new Keyboard();
 let allAssetsAreLoaded = false;
 
 
+/**
+ * init game by initialize a new world
+ */
 function init() {
     initLevel();
     canvas = document.getElementById('canvas');
@@ -14,6 +17,10 @@ function init() {
     touchEventsEnd();
 }
 
+
+/**
+ * blends off the loading spinner, blends in the buttons for info and buttons for mobile control
+ */
 window.addEventListener('load', () => {
     document.getElementById('loader-box').classList.add('display-none');
     document.getElementById('info-btns-container').classList.remove('display-none');
@@ -76,7 +83,7 @@ function restartGame() {
 
 
 /**
- * function to reset the endscreen, blending off endscreen an blend in the game navigation for touchdevices
+ * function to reset the endscreen, blending off endscreen and restart button
  */
 function resetEndscreen() {
     document.getElementById('restart-btn-boss').classList.add('display-none');
@@ -190,9 +197,9 @@ function fullscreen() {
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+    } else if (element.msRequestFullscreen) {
         element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+    } else if (element.webkitRequestFullscreen) {
         element.webkitRequestFullscreen();
     }
 }

@@ -23,11 +23,9 @@ class ThrowableObject extends Bottle {
 
     constructor(posX, posY) {
         super().loadImage('./img/6_salsa_bottle/salsa_bottle.png');
-        // super();
         this.posX = posX;
         this.posY = posY;
         super.loadAllImages(this.IMAGES);
-
         this.animate();
     }
 
