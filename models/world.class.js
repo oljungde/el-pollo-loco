@@ -99,7 +99,7 @@ class World {
     characterIsInjured() {
         if (this.character.energy > 0) {
             this.character.hit();
-            // this.character.hurtAudio.play();
+            this.character.hurtAudio.play();
         }
         this.characterEnergyStatusbar.setEnergyValue(this.character.energy);
     }
@@ -358,13 +358,13 @@ class World {
     whoWins() {
         if (this.character.isDead()) {
             document.getElementById('character_lost').style.visibility = 'visible';
-            // this.lostAudio.play();
+            this.lostAudio.play();
             setTimeout(() => {
                 document.getElementById('restart-btn-boss').classList.remove('display-none');
             }, 5000);
         } else {
             document.getElementById('character_won').style.visibility = 'visible';
-            // this.winAudio.play();
+            this.winAudio.play();
             setTimeout(() => {
                 document.getElementById('restart-btn-character').classList.remove('display-none');
             }, 5000);

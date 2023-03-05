@@ -42,13 +42,13 @@ function startGame() {
             document.getElementById('loader-box').classList.add('display-none');
             world.character.animate();
             world.level.endboss.animate();
-            // world.level.enemies.forEach(enemy => {
-            //     enemy.animate();
-            // });
-            // world.level.clouds.forEach(cloud => {
-            //     cloud.animate();
-            // });
-            // world.playAudio();
+            world.level.enemies.forEach(enemy => {
+                enemy.animate();
+            });
+            world.level.clouds.forEach(cloud => {
+                cloud.animate();
+            });
+            world.playAudio();
             canvas.classList.remove('display-none');
             document.getElementById('startscreen').classList.add('display-none');
             document.getElementById('btn-info').classList.add('display-none');
@@ -62,18 +62,23 @@ function startGame() {
 /**
  * function to restart the game after one run
  */
-async function restartGame() {
-    init();
-    startGame();
-    document.getElementById('info-btns-container').classList.remove('display-none');
-    document.getElementById('play-btns-container').classList.remove('display-none');
+function restartGame() {
+    document.getElementById('loader-box').classList.remove('display-none');
+    setTimeout(() => {
+        resetEndscreen();
+        init();
+        startGame();
+        document.getElementById('info-btns-container').classList.remove('display-none');
+        document.getElementById('play-btns-container').classList.remove('display-none');
+    }, 2000);
+
 }
 
 
 /**
  * function to reset the endscreen, blending off endscreen an blend in the game navigation for touchdevices
  */
-async function resetEndscreen() {
+function resetEndscreen() {
     document.getElementById('restart-btn-boss').classList.add('display-none');
     document.getElementById('restart-btn-character').classList.add('display-none');
     document.getElementById('character_lost').style.removeProperty('visibility');
