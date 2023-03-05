@@ -166,7 +166,7 @@ class Character extends MovableObject {
         if (this.isDead()) {
             this.idleTimeout = 0;
             this.playAnimation(this.IMAGES.IMAGES_DEAD);
-            this.dyingAudio.play();
+            // this.dyingAudio.play();
         }
     }
 
