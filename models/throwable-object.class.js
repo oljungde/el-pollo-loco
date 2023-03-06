@@ -48,19 +48,21 @@ class ThrowableObject extends Bottle {
      * function for throwing a salsa bottle in right or left deriction
      */
     throw() {
+        this.applyGravity();
         if (!world.isBottleThrown) {
-            this.applyGravity();
-            setStoppableInterval(() => {
-                if (this.speed == 0) {
-                    this.posX += 0;
-                }
-                if (!world.character.otherDirection) {
+            if (!world.character.otherDirection) {
+                setStoppableInterval(() => {
                     this.posX += 8;
-                }
-                if (world.character.otherDirection) {
+                }, 1000 / 40);
+            } else if (world.character.otherDirection) {
+                setStoppableInterval(() => {
                     this.posX -= 8;
-                }
-            }, 1000 / 40);
+                }, 1000 / 40);
+            } else if (this.speed == 0) {
+                setStoppableInterval(() => {
+                    this.posX += 0;
+                }, 1000 / 40);
+            }
         }
     }
 }
