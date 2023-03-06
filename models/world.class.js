@@ -314,7 +314,7 @@ class World {
     addObjectsToCanvas(objects) {
         objects.forEach(object => {
             this.addToCanvas(object);
-        })
+        });
     }
 
 

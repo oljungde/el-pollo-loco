@@ -90,9 +90,9 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
             }
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES.IMAGES_DEAD);
+                this.endbossDead();
             }
-        }, 150);
+        }, 100);
 
         setStoppableInterval(() => {
             if (this.distanceCharacterEndboss() < 400) {
@@ -100,6 +100,15 @@ class Endboss extends MovableObject {
                 this.endbossMove();
             }
         }, 250);
+    }
+
+
+    endbossDead() {
+        this.playAnimation(this.IMAGES.IMAGES_DEAD);
+        setTimeout(() => {
+            stopGame();
+        }, 100);
+
     }
 
 

@@ -150,9 +150,10 @@ h1 {
     position: absolute;
     top: 80px;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.75);
     padding: 0 32px;
     font-size: 28px;
+    border-radius: 16px;
 }
 
 .info-btn-container {
@@ -291,6 +292,12 @@ canvas {
         aspect-ratio: 1.5/1;
         border-radius: initial;
     }
+
+    .info {
+        /* height: 480px; */
+        width: 100%;
+        border-radius: initial;
+    }
 }
 
 @media only screen and (max-height: 560px) {
@@ -332,6 +339,13 @@ canvas {
     canvas {
         height: 100%;
         aspect-ratio: 1.5/1;
+        border-radius: initial;
+    }
+
+    .info {
+        height: 100%;
+        top: 0;
+        font-size: 20px;
         border-radius: initial;
     }
 }

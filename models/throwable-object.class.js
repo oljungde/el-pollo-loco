@@ -39,7 +39,7 @@ class ThrowableObject extends Bottle {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES.IMAGES_SPLASH);
             }
-        }, 100);
+        }, 50);
     }
 
 
@@ -49,17 +49,17 @@ class ThrowableObject extends Bottle {
     throw() {
         this.applyGravity();
         if (!world.isBottleThrown) {
-            if (!world.character.otherDirection) {
+            if (this.speed == 0) {
+                setStoppableInterval(() => {
+                    this.posX += 0;
+                }, 1000 / 40);
+            } else if (!world.character.otherDirection) {
                 setStoppableInterval(() => {
                     this.posX += 8;
                 }, 1000 / 40);
             } else if (world.character.otherDirection) {
                 setStoppableInterval(() => {
                     this.posX -= 8;
-                }, 1000 / 40);
-            } else if (this.speed == 0) {
-                setStoppableInterval(() => {
-                    this.posX += 0;
                 }, 1000 / 40);
             }
         }
