@@ -8,7 +8,6 @@ class Chicken extends MovableObject {
             './img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
         ]
     }
-    chickenMoving;
 
 
     constructor() {
@@ -26,13 +25,8 @@ class Chicken extends MovableObject {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES.IMAGES_WALKING)
         }, 500);
-        this.chickenMoving = setStoppableInterval(() => {
+        setStoppableInterval(() => {
             this.moveLeft()
         }, 1000 / 60);
-    }
-
-
-    stopMoving() {
-        cle
     }
 }

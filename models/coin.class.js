@@ -26,4 +26,15 @@ class Coin extends MovableObject {
             this.playAnimation(this.IMAGES.IMAGES_COINS);
         }, 400)
     }
+
+
+    muteCoinAudio() {
+        this.coinCollectedAudio.muted = true;
+
+    }
+
+
+    unmuteCoinAudio() {
+        this.coinCollectedAudio.muted = false;
+    }
 }

@@ -48,9 +48,9 @@ function startGame() {
         if (allAssetsAreLoaded) {
             document.getElementById('loader-box').classList.add('display-none');
             startAnimations();
+            world.playBackgroundAudio();
             canvas.classList.remove('display-none');
             document.getElementById('startscreen').classList.add('display-none');
-            // document.getElementById('btn-info').classList.add('display-none');
             clearInterval(startGameAnimations);
             allAssetsAreLoaded = false;
         }
@@ -67,7 +67,6 @@ function startAnimations() {
     // world.level.clouds.forEach(cloud => {
     //     cloud.animate();
     // });
-    // world.playAudio();
 }
 
 
@@ -99,11 +98,13 @@ function resetEndscreen() {
 
 
 /**
- * clear all intervals from array allIntervals to stop all game animation
+ * clear all intervals from array allIntervals to stop all game animation, reset sound button
  */
 function stopGame() {
     allIntervals.forEach(clearInterval);
-    world.stopAudio();
+    world.stopBackgroundAudio();
+    document.getElementById('btn-mute').classList.remove('display-none');
+    document.getElementById('btn-unmute').classList.add('display-none');
 }
 
 
@@ -228,6 +229,30 @@ function exitFullscreen() {
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
+}
+
+
+function muteAllAudio() {
+    document.getElementById('btn-mute').classList.add('display-none');
+    document.getElementById('btn-unmute').classList.remove('display-none');
+    world.muteWorldAudio();
+    world.character.muteCharacterAudio();
+    world.level.coins.forEach(coin => {
+        coin.muteCoinAudio();
+    });
+    world.level.endboss.muteEndbossAudio();
+}
+
+
+function unmuteAllAudio() {
+    document.getElementById('btn-mute').classList.remove('display-none');
+    document.getElementById('btn-unmute').classList.add('display-none');
+    world.unmuteWorldAudio();
+    world.character.unmuteCharacterAudio();
+    world.level.coins.forEach(coin => {
+        coin.unmuteCoinAudio();
+    });
+    world.level.endboss.unmuteEndbossAudio();
 }
 
 

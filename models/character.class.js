@@ -84,6 +84,24 @@ class Character extends MovableObject {
     }
 
 
+    muteCharacterAudio() {
+        this.walkingAudio.muted = true;
+        this.hurtAudio.muted = true;
+        this.collectBottleAudio.muted = true;
+        this.dyingAudio.muted = true;
+        this.jumpAudio.muted = true;
+    }
+
+
+    unmuteCharacterAudio() {
+        this.walkingAudio.muted = false;
+        this.hurtAudio.muted = false;
+        this.collectBottleAudio.muted = false;
+        this.dyingAudio.muted = false;
+        this.jumpAudio.muted = false;
+    }
+
+
     /**
      * function to start animations for the character
      */

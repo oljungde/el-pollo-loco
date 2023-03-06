@@ -59,6 +59,22 @@ class Endboss extends MovableObject {
     }
 
 
+    muteEndbossAudio() {
+        this.alertAudio.muted = true;
+        this.attackAudio.muted = true;
+        this.isHurtAudio.muted = true;
+        this.isDeadAudio.muted = true;
+    }
+
+
+    unmuteEndbossAudio() {
+        this.alertAudio.muted = false;
+        this.attackAudio.muted = false;
+        this.isHurtAudio.muted = false;
+        this.isDeadAudio.muted = false;
+    }
+
+
     /**
      * move the endboss and play the walking animation
      */

@@ -14,6 +14,8 @@ class World {
     deadEnemies = [];
     backgroundAudio = new Audio('./audio/background.mp3');
     backgroundChickenAudio = new Audio('./audio/chicken-background.mp3');
+    chickenDyingAudio = new Audio('./audio/chicken-dead.mp3');
+    smallChickenDyingAudio = new Audio('./audio/small-chicken-dead.mp3');
     winAudio = new Audio('./audio/win2.mp3');
     lostAudio = new Audio('./audio/lost.mp3');
 
@@ -48,7 +50,7 @@ class World {
     }
 
 
-    playAudio() {
+    playBackgroundAudio() {
         this.backgroundAudio.play();
         this.backgroundAudio.loop = true;
         this.backgroundChickenAudio.play();
@@ -56,9 +58,27 @@ class World {
     }
 
 
-    stopAudio() {
+    stopBackgroundAudio() {
         this.backgroundAudio.pause();
         this.backgroundChickenAudio.pause();
+    }
+
+
+    muteWorldAudio() {
+        this.stopBackgroundAudio();
+        this.chickenDyingAudio.muted = true;
+        this.smallChickenDyingAudio.muted = true;
+        this.winAudio.muted = true;
+        this.lostAudio.muted = true;
+    }
+
+
+    unmuteWorldAudio() {
+        this.playBackgroundAudio();
+        this.chickenDyingAudio.muted = false;
+        this.smallChickenDyingAudio.muted = false;
+        this.winAudio.muted = false;
+        this.lostAudio.muted = false;
     }
 
 
@@ -207,8 +227,10 @@ class World {
         let deadEnemy;
         if (enemy instanceof Chicken) {
             deadEnemy = new DeadChicken(enemy.posX, enemy.posY);
+            this.chickenDyingAudio.play();
         } else {
             deadEnemy = new DeadSmallChicken(enemy.posX, enemy.posY);
+            this.smallChickenDyingAudio.play();
         }
         this.deadEnemies.push(deadEnemy);
         this.level.enemies.splice(indexOfEnemies, 1);
