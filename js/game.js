@@ -47,22 +47,27 @@ function startGame() {
     let startGameAnimations = setInterval(() => {
         if (allAssetsAreLoaded) {
             document.getElementById('loader-box').classList.add('display-none');
-            world.character.animate();
-            world.level.endboss.animate();
-            // world.level.enemies.forEach(enemy => {
-            //     enemy.animate();
-            // });
-            // world.level.clouds.forEach(cloud => {
-            //     cloud.animate();
-            // });
-            // world.playAudio();
+            startAnimations();
             canvas.classList.remove('display-none');
             document.getElementById('startscreen').classList.add('display-none');
-            document.getElementById('btn-info').classList.add('display-none');
+            // document.getElementById('btn-info').classList.add('display-none');
             clearInterval(startGameAnimations);
             allAssetsAreLoaded = false;
         }
     }, 200);
+}
+
+
+function startAnimations() {
+    world.character.animate();
+    world.level.endboss.animate();
+    world.level.enemies.forEach(enemy => {
+        enemy.animate();
+    });
+    // world.level.clouds.forEach(cloud => {
+    //     cloud.animate();
+    // });
+    // world.playAudio();
 }
 
 
@@ -230,6 +235,7 @@ function exitFullscreen() {
  * show the game info overlay on start screen
  */
 function showInfo() {
+    stopGame();
     document.getElementById('startscreen').classList.add('blur');
     document.getElementById('info-btns-container').classList.add('blur');
     document.getElementById('play-btns-container').classList.add('blur');
@@ -241,6 +247,8 @@ function showInfo() {
  * hides the game info overlay on start screen
  */
 function closeInfo() {
+    startAnimations();
+    world.run();
     document.getElementById('startscreen').classList.remove('blur');
     document.getElementById('info-btns-container').classList.remove('blur');
     document.getElementById('play-btns-container').classList.remove('blur');
