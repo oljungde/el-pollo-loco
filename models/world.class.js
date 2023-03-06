@@ -16,6 +16,7 @@ class World {
     backgroundChickenAudio = new Audio('./audio/chicken-background.mp3');
     chickenDyingAudio = new Audio('./audio/chicken-dead.mp3');
     smallChickenDyingAudio = new Audio('./audio/small-chicken-dead.mp3');
+    splashBottleAudio = new Audio('./audio/bottle-splash.mp3');
     winAudio = new Audio('./audio/win2.mp3');
     lostAudio = new Audio('./audio/lost.mp3');
 
@@ -68,6 +69,7 @@ class World {
         this.stopBackgroundAudio();
         this.chickenDyingAudio.muted = true;
         this.smallChickenDyingAudio.muted = true;
+        this.splashBottleAudio.muted = true;
         this.winAudio.muted = true;
         this.lostAudio.muted = true;
     }
@@ -77,6 +79,7 @@ class World {
         this.playBackgroundAudio();
         this.chickenDyingAudio.muted = false;
         this.smallChickenDyingAudio.muted = false;
+        this.splashBottleAudio.muted = false;
         this.winAudio.muted = false;
         this.lostAudio.muted = false;
     }
@@ -156,7 +159,7 @@ class World {
      */
     checkCollisionTrownBottleEndboss(bottle, bottleIndex) {
         if (this.level.endboss.isColliding(bottle)) {
-            bottle.splashAudio.play();
+            this.splashBottleAudio.play();
             this.level.endboss.hit();
             this.level.endboss.isCollided = true;
             this.endbossStatusbar.setEnergyValue(this.level.endboss.energy);
@@ -176,7 +179,7 @@ class World {
      */
     checkCollisionThrownBottleGround(bottle, bottleIndex) {
         if (!bottle.isAboveGround()) {
-            bottle.splashAudio.play();
+            this.splashBottleAudio.play();
             setTimeout(() => {
                 this.bottlesToThrow.splice(bottleIndex);
                 this.isBottleThrown = false;

@@ -38,13 +38,13 @@ class CoinStatusbar extends DrawableObject {
      * @returns fill value of statusbar 
      */
     resolveImageIndex() {
-        if (this.coinValue == 10) {
+        if (this.coinValue == 6) {
             return 5;
-        } else if (this.coinValue >= 8) {
+        } else if (this.coinValue >= 5) {
             return 4;
-        } else if (this.coinValue >= 6) {
-            return 3;
         } else if (this.coinValue >= 4) {
+            return 3;
+        } else if (this.coinValue >= 3) {
             return 2;
         } else if (this.coinValue >= 2) {
             return 1;

@@ -18,7 +18,6 @@ class ThrowableObject extends Bottle {
     speed = 42;
     speedY = 30;
     acceleration = 2.25;
-    splashAudio = new Audio('./audio/bottle-splash.mp3');
 
 
     constructor(posX, posY) {

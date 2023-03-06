@@ -64,9 +64,9 @@ function startAnimations() {
     world.level.enemies.forEach(enemy => {
         enemy.animate();
     });
-    // world.level.clouds.forEach(cloud => {
-    //     cloud.animate();
-    // });
+    world.level.clouds.forEach(cloud => {
+        cloud.animate();
+    });
 }
 
 
